@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: end;
+  padding-right: 100px;
+  padding-top: 32px;
+
+  &__menu {
+    & * {
+      color: rgb(255, 165, 0);
+      &:hover {
+        color: rgb(255, 69, 0);
+      }
+    }
+  }
+
+  &__home {
+    margin-right: 44px;
+  }
+
+  &__contact {
+  }
+}

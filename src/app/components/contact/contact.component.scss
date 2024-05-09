@@ -1,0 +1,21 @@
+.page-title{
+	width: 100%;
+	font-size: 32px;
+	text-align: center;
+	padding-block: 72px;
+}
+
+.address {
+	padding-top: 64px;
+	margin-left: 32px;
+	padding-inline: 32px;
+	font-size: 18px;
+
+	&__prefix {
+	}
+	
+	&__text {
+		font-weight: 500;
+		padding-top: 16px;
+	}
+}
