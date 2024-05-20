@@ -1,38 +1,43 @@
 <div
   class="product"
-  [ngClass]="{ 'product--special': main }"
-  [class]="getDiscountClass(discount)"
+  [ngClass]="{ 'product--special': product.main }"
+  [class]="getDiscountClass(product.discount)"
 >
-  <div *ngIf="discount > 0" class="product__discount">
-    <p class="product__discount-value">{{ discount }}<span>%</span></p>
+  <div *ngIf="product.discount > 0" class="product__discount">
+    <p class="product__discount-value">{{ product.discount }}<span>%</span></p>
     <p>off</p>
   </div>
   <div class="product__description">
-    {{ description | charactersLimitation : 70 }}
+    {{ product.description | charactersLimitation : 70 }}
   </div>
-  <div class="product__image" [ngStyle]="{ 'background-image': 'url(' + imgUrl + ')' }"></div>
+  <div
+    class="product__image"
+    [ngStyle]="{ 'background-image': 'url(' + product.imgUrl + ')' }"
+  ></div>
   <div class="product__details">
     <p class="product__details-price">
-      <ng-container *ngIf="discount > 0; else noDiscount"
-        >{{ priceDiscounted | currency : "EUR" : "symbol" : "1.0-2" }}
+      <ng-container *ngIf="product.discount > 0; else noDiscount"
+        >{{ getDiscountedPrice() | currency : "EUR" : "symbol" : "1.0-2" }}
       </ng-container>
       <ng-template #noDiscount>{{
-        price | currency : "EUR" : "symbol" : "1.0-2"
+        product.price | currency : "EUR" : "symbol" : "1.0-2"
       }}</ng-template>
     </p>
-    <p *ngIf="discount > 0" class="product__details-price-original">
-      {{ price | currency : "EUR" : "symbol" : "1.0-2"
+    <p *ngIf="product.discount > 0" class="product__details-price-original">
+      {{ product.price | currency : "EUR" : "symbol" : "1.0-2"
       }}<span class="line"></span>
     </p>
-    <span class="product__details-shop">{{ shop }}</span>
+    <span class="product__details-shop">{{ product.shop }}</span>
   </div>
   <div class="product__tag-list">
     <span *ngIf="isShippingTagActive()" [ngClass]="getTagClass()">{{
-      shipping
+      product.shipping
     }}</span>
-    <span *ngIf="isNew" [ngClass]="getTagClass()">New</span>
+    <span *ngIf="product.isNew" [ngClass]="getTagClass()">New</span>
     <span *ngIf="isDiscountTagActive()" [ngClass]="getTagClass()">
-      <app-discount-timer [discountUntil]="discountUntil"></app-discount-timer>
+      <app-discount-timer
+        [discountUntil]="product.discountUntil"
+      ></app-discount-timer>
     </span>
   </div>
 </div>

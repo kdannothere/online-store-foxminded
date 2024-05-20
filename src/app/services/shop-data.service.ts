@@ -1,4 +1,3 @@
-// shop-data.service.ts
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { data } from '../../assets/data';
@@ -8,7 +7,6 @@ import { Product } from '../models/product';
   providedIn: 'root',
 })
 export class ShopDataService {
-
   getAllProducts(): Observable<Product[]> {
     return of(data);
   }

@@ -2,34 +2,13 @@
   <h1 class="page-title">Main</h1>
   <div class="list">
     <div class="special-product-list">
-      <ng-container *ngFor="let product of products">
-        <app-product
-          *ngIf="product.main"
-          [main]="product.main"
-          [imgUrl]="product.imgUrl"
-          [description]="product.description"
-          [price]="product.price"
-          [isNew]="product.isNew"
-          [shipping]="product.shipping"
-          [discount]="product.discount"
-					[discountUntil]="product.discountUntil"
-          [shop]="product.shop"
-        ></app-product>
+      <ng-container *ngFor="let product of specialProducts">
+        <app-product [product]="product"></app-product>
       </ng-container>
     </div>
     <div class="product-list">
       <ng-container *ngFor="let product of products">
-        <app-product
-          *ngIf="!product.main"
-					[imgUrl]="product.imgUrl"
-          [description]="product.description"
-          [price]="product.price"
-          [isNew]="product.isNew"
-          [shipping]="product.shipping"
-          [discount]="product.discount"
-          [discountUntil]="product.discountUntil"
-          [shop]="product.shop"
-        ></app-product>
+        <app-product [product]="product"></app-product>
       </ng-container>
     </div>
   </div>
