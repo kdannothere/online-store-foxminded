@@ -2,12 +2,12 @@
   <h1 class="page-title">Main</h1>
   <div class="list">
     <div class="special-product-list">
-      <ng-container *ngFor="let product of specialProducts">
+      <ng-container *ngFor="let product of specialProducts$ | async">
         <app-product [product]="product"></app-product>
       </ng-container>
     </div>
     <div class="product-list">
-      <ng-container *ngFor="let product of products">
+      <ng-container *ngFor="let product of products$ | async">
         <app-product [product]="product"></app-product>
       </ng-container>
     </div>
