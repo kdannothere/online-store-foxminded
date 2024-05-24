@@ -1,0 +1,274 @@
+$color-blue: rgb(97, 194, 255);
+$color-gray-light: rgb(201, 201, 201);
+$color-gray-medium: rgb(162, 162, 162);
+
+.details {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  justify-content: center;
+  padding-block: 48px;
+  padding-inline: 24px;
+
+  &__left {
+    flex-basis: 50%;
+  }
+
+  &__picture {
+    position: relative;
+    display: flex;
+    width: 500px;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    justify-content: center;
+    align-items: flex-end;
+    cursor: pointer;
+  }
+
+  &__picture-zoom {
+    font-size: 14px;
+    color: white;
+    background-color: $color-gray-medium;
+    margin-bottom: 2px;
+    padding-block: 2px;
+    padding-inline: 8px;
+    border-radius: 6px;
+  }
+
+  &__color-row {
+    text-align: center;
+    padding-block: 32px;
+  }
+
+  &__picture-row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+
+  &__picture-small {
+    width: 36px;
+    height: 36px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 1px solid $color-gray-light;
+    margin-inline: 2px;
+    opacity: 0.7;
+    cursor: pointer;
+  }
+
+  &__picture-small--active {
+    opacity: 1;
+    border: 1px solid black;
+  }
+
+  &__right {
+    flex-basis: 50%;
+    padding-left: 24px;
+  }
+
+  &__name {
+    font-size: 32px;
+    font-weight: 500;
+    padding-bottom: 16px;
+  }
+
+  &__description {
+    font-size: 17px;
+    padding-bottom: 32px;
+  }
+
+  &__description-text {
+  }
+
+  &__description-more {
+    color: $color-blue;
+    cursor: pointer;
+  }
+
+  &__description-less {
+    color: $color-blue;
+    cursor: pointer;
+  }
+
+  &__price {
+    font-size: 24px;
+    font-weight: 500;
+    padding-bottom: 16px;
+  }
+
+  &__rating {
+    font-size: 13px;
+    padding-bottom: 8px;
+  }
+
+  &__rating-stars {
+		width: 107px;
+		height: 22px;
+		background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  &__review-amount {
+    color: $color-blue;
+    cursor: pointer;
+  }
+
+  &__review {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    font-size: 14px;
+    padding-bottom: 24px;
+  }
+
+  &__review-read {
+    color: $color-blue;
+    cursor: pointer;
+  }
+
+  &__review-write {
+    color: $color-blue;
+    cursor: pointer;
+  }
+
+  &__form-label {
+    font-size: 16px;
+    padding-bottom: 4px;
+  }
+
+  &__form-select {
+    width: 100%;
+    height: 28px;
+    border: 1px solid #000;
+    font-size: 16px;
+    padding-left: 8px;
+  }
+
+  &__color-form {
+    padding-bottom: 24px;
+  }
+
+  &__color-label {
+    font-size: 16px;
+  }
+
+  &__size-form {
+    padding-bottom: 24px;
+  }
+
+  &__availability {
+    font-size: 17px;
+    padding-bottom: 24px;
+  }
+
+  &__availability-text {
+    font-weight: 500;
+    padding-right: 4px;
+  }
+
+  &__availability-value {
+  }
+
+  &__quantity-form {
+    padding-bottom: 24px;
+  }
+
+  &__quantity-form input {
+    width: 120px;
+    height: 28px;
+    font-size: 16px;
+    padding-left: 10px;
+    padding-right: 4px;
+    border: 1px solid #000;
+  }
+
+  &__button-add-to-cart {
+    background-color: $color-blue;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.7;
+    padding-block: 4px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &__button-add-to-cart-img {
+  }
+
+  &__button-add-to-cart-text {
+  }
+
+  &__button-add-to-wish-list {
+    border: 2px solid #000;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.7;
+    padding-block: 4px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &__button-add-to-wish-list-img {
+    width: 16px;
+    height: 16px;
+  }
+
+  &__button-add-to-wish-list-text {
+  }
+}
+.reviews {
+  &__title {
+  }
+
+  &__list {
+  }
+
+  &__write {
+  }
+}
+.review {
+  &__main {
+  }
+
+  &__author {
+  }
+
+  &__rating {
+  }
+
+  &__text {
+  }
+}
+.write {
+  &__title {
+  }
+
+  &__user-name-form {
+  }
+
+  &__rating {
+  }
+
+  &__text-form {
+  }
+
+  &__button-post {
+  }
+}

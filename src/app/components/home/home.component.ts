@@ -4,6 +4,7 @@ import { ProductComponent } from '../product/product.component';
 import { ShopDataService } from '../../services/shop-data.service';
 import { Observable, map } from 'rxjs';
 import { Product } from '../../models/product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ export class HomeComponent {
   specialProducts$: Observable<Product[]>;
   products$: Observable<Product[]>;
 
-  constructor(private shopDataService: ShopDataService) {
+  constructor(private shopDataService: ShopDataService, private router: Router) {
     this.allProducts$ = this.shopDataService.getAllProducts();
     this.specialProducts$ = this.allProducts$.pipe(
       map((products) => products.filter((product) => product.main))
@@ -25,5 +26,9 @@ export class HomeComponent {
     this.products$ = this.allProducts$.pipe(
       map((products) => products.filter((product) => !product.main))
     );
+  }
+
+	navigateToOtherPage(productId: number) {
+    this.router.navigate([`/products/${productId}`]);
   }
 }

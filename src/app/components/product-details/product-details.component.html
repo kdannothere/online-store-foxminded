@@ -1,0 +1,143 @@
+<div class="details">
+  <div class="details__left">
+    <div
+      class="details__picture"
+      [ngStyle]="{ 'background-image': 'url(' + picture + ')' }"
+    >
+      <span class="details__picture-zoom">+ zoom</span>
+    </div>
+    <p class="details__color-row">{{ colorRow }}</p>
+    <div class="details__picture-row">
+      <div
+        class="details__picture-small"
+        *ngFor="let image of images"
+        [style.background-image]="'url(' + image + ')'"
+        [ngClass]="{ 'details__picture-small--active': activeImage === image }"
+        (click)="changeActiveImage(image)"
+      ></div>
+    </div>
+  </div>
+  <div class="details__right">
+    <h1 class="details__name">{{ product?.name }}</h1>
+    <div class="details__description">
+      <p class="details__description-text">
+        {{ description | charactersLimitation : descriptionLimit : false }}
+        <span
+          *ngIf="readMore"
+          (click)="hideReadMore()"
+          class="details__description-more"
+          >...(Read More)</span
+        >
+        <span
+          *ngIf="readLess"
+          (click)="showReadMore()"
+          class="details__description-less"
+          >(Read Less)</span
+        >
+      </p>
+    </div>
+    <h2 class="details__price">
+      {{
+        price
+          | discountedPrice : discount
+          | currency : "EUR" : "symbol" : "1.0-2"
+      }}
+    </h2>
+    <div class="details__rating">
+      <span class="details__rating-stars" [style.background-image]="'url(' + ratingImage + ')'"></span>
+      <a class="details__review-amount" href="{{ url }}#reviews"
+        >({{ reviewAmount }})</a
+      >
+    </div>
+    <div class="details__review">
+      <a
+        href="{{ url }}#reviews"
+        class="details__review-read"
+        *ngIf="reviewAmount > 0; else noReviews"
+      >
+        Read {{ reviewAmount }} Reviews
+      </a>
+
+      <ng-template #noReviews>
+        <a href="{{ url }}#reviews" class="details__review-read"
+          >No reviews available</a
+        >
+      </ng-template>
+
+      <a class="details__review-write" href="{{ url }}#write-review"
+        >Write a Review</a
+      >
+    </div>
+    <div class="details__color-form">
+      <div class="details__form-label">Color</div>
+      <select class="details__form-select" name="color">
+        <option *ngFor="let color of colors" value="{{ color }}">
+          {{ color }}
+        </option>
+      </select>
+    </div>
+    <div class="details__size-form">
+      <div class="details__form-label">Size</div>
+      <select class="details__form-select" name="size">
+        <option *ngFor="let size of sizes" value="{{ size }}">
+          {{ size }}
+        </option>
+      </select>
+    </div>
+    <div class="details__availability">
+      <span class="details__availability-text">Availability:</span>
+      <span class="details__availability-value">Please select options</span>
+    </div>
+    <div class="details__quantity-form">
+      <div class="details__form-label">Quantity</div>
+      <input type="number" value="1" min="1" />
+    </div>
+    <div class="details__button-add-to-cart">
+      <div class="details__button-add-to-cart-img">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="16px"
+          viewBox="0 -960 960 960"
+          width="18px"
+          fill="#e8eaed"
+        >
+          <path
+            d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"
+          />
+        </svg>
+      </div>
+      <span class="details__button-add-to-cart-text">Add to cart</span>
+    </div>
+    <div class="details__button-add-to-wish-list">
+      <div class="details__button-add-to-wish-list-img">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+          <path
+            d="M234.7 42.7L197 56.8c-3 1.1-5 4-5 7.2s2 6.1 5 7.2l37.7 14.1L248.8 123c1.1 3 4 5 7.2 5s6.1-2 7.2-5l14.1-37.7L315 71.2c3-1.1 5-4 5-7.2s-2-6.1-5-7.2L277.3 42.7 263.2 5c-1.1-3-4-5-7.2-5s-6.1 2-7.2 5L234.7 42.7zM46.1 395.4c-18.7 18.7-18.7 49.1 0 67.9l34.6 34.6c18.7 18.7 49.1 18.7 67.9 0L529.9 116.5c18.7-18.7 18.7-49.1 0-67.9L495.3 14.1c-18.7-18.7-49.1-18.7-67.9 0L46.1 395.4zM484.6 82.6l-105 105-23.3-23.3 105-105 23.3 23.3zM7.5 117.2C3 118.9 0 123.2 0 128s3 9.1 7.5 10.8L64 160l21.2 56.5c1.7 4.5 6 7.5 10.8 7.5s9.1-3 10.8-7.5L128 160l56.5-21.2c4.5-1.7 7.5-6 7.5-10.8s-3-9.1-7.5-10.8L128 96 106.8 39.5C105.1 35 100.8 32 96 32s-9.1 3-10.8 7.5L64 96 7.5 117.2zm352 256c-4.5 1.7-7.5 6-7.5 10.8s3 9.1 7.5 10.8L416 416l21.2 56.5c1.7 4.5 6 7.5 10.8 7.5s9.1-3 10.8-7.5L480 416l56.5-21.2c4.5-1.7 7.5-6 7.5-10.8s-3-9.1-7.5-10.8L480 352l-21.2-56.5c-1.7-4.5-6-7.5-10.8-7.5s-9.1 3-10.8 7.5L416 352l-56.5 21.2z"
+          />
+        </svg>
+      </div>
+      <span class="details__button-add-to-wish-list-text"
+        >Add to Wish List</span
+      >
+    </div>
+  </div>
+</div>
+<div class="reviews" id="reviews">
+  <div class="reviews__title">Reviews</div>
+  <div class="reviews__list">
+    <div class="review">
+      <div class="review__main">
+        <div class="review__author">Author</div>
+        <div class="review__rating">5 stars</div>
+      </div>
+      <div class="review__text">Review text is here</div>
+    </div>
+  </div>
+  <div class="reviews__write write" id="write-review">
+    <p class="write__title">Write your review:</p>
+    <div class="write__user-name-form"></div>
+    <div class="write__rating"></div>
+    <div class="write__text-form"></div>
+    <div class="write__button-post">Post your review</div>
+  </div>
+</div>

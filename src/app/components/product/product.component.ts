@@ -1,23 +1,29 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DiscountTimerComponent } from './discount-timer/discount-timer.component';
-import { CharactersLimitationPipe } from './characters-limitation.pipe';
+import { CharactersLimitationPipe } from '../../pipes/characters-limitation.pipe';
 import { Product } from '../../models/product';
+import { ProductDetailsComponent } from '../product-details/product-details.component';
+import { DiscountedPricePipe } from '../../pipes/discounted-price.pipe';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule, DiscountTimerComponent, CharactersLimitationPipe],
+  imports: [
+    CommonModule,
+    ProductDetailsComponent,
+    DiscountTimerComponent,
+    CharactersLimitationPipe,
+    DiscountedPricePipe,
+  ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',
 })
 export class ProductComponent {
   @Input() product!: Product;
-
-  getDiscountedPrice(): number {
-    let result =
-      this.product.price - this.product.price * (this.product.discount / 100);
-    return result;
+  @Output() clicked = new EventEmitter<void>();
+  handleClick() {
+    this.clicked.emit();
   }
 
   getDiscountClass(discount: number): string {

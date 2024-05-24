@@ -2,6 +2,7 @@
   class="product"
   [ngClass]="{ 'product--special': product.main }"
   [class]="getDiscountClass(product.discount)"
+	(click)="handleClick()"
 >
   <div *ngIf="product.discount > 0" class="product__discount">
     <p class="product__discount-value">{{ product.discount }}<span>%</span></p>
@@ -16,12 +17,9 @@
   ></div>
   <div class="product__details">
     <p class="product__details-price">
-      <ng-container *ngIf="product.discount > 0; else noDiscount"
-        >{{ getDiscountedPrice() | currency : "EUR" : "symbol" : "1.0-2" }}
-      </ng-container>
-      <ng-template #noDiscount>{{
-        product.price | currency : "EUR" : "symbol" : "1.0-2"
-      }}</ng-template>
+      <span
+        >{{ product.price | discountedPrice: product.discount | currency : "EUR" : "symbol" : "1.0-2" }}
+      </span>
     </p>
     <p *ngIf="product.discount > 0" class="product__details-price-original">
       {{ product.price | currency : "EUR" : "symbol" : "1.0-2"

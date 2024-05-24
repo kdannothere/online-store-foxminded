@@ -1,0 +1,170 @@
+import { Component, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ShopDataService } from '../../services/shop-data.service';
+import { Product } from '../../models/product';
+import { map, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { CharactersLimitationPipe } from '../../pipes/characters-limitation.pipe';
+import { DiscountedPricePipe } from '../../pipes/discounted-price.pipe';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-product-details',
+  standalone: true,
+  imports: [CommonModule, CharactersLimitationPipe, DiscountedPricePipe],
+  templateUrl: './product-details.component.html',
+  styleUrl: './product-details.component.scss',
+})
+export class ProductDetailsComponent implements OnDestroy {
+  product: Product | null = null;
+  private destroy$ = new Subject<void>();
+  private imageFolderPath = '/assets/images/';
+  private minDescriptionLimit: number = 190;
+  private maxDescriptionLimit: number = 2000;
+  descriptionLimit: number = this.minDescriptionLimit;
+  activeImage: string = '';
+  readMore: boolean = true;
+
+  hideReadMore() {
+    this.descriptionLimit = this.maxDescriptionLimit;
+    this.readMore = false;
+  }
+
+  showReadMore() {
+    this.descriptionLimit = this.minDescriptionLimit;
+    this.readMore = true;
+  }
+
+  get readLess(): boolean {
+    return !this.readMore && this.description.length > this.minDescriptionLimit;
+  }
+
+  get url(): string {
+    return '/products/' + ((this.product && this.product.id) || 0);
+  }
+
+  // needs a list of images
+  get images(): string[] {
+    return (
+      // 'aaa' text is needed to see the difference between images because these images are the same
+      (this.product && [this.product.imgUrl, this.product.imgUrl + 'aaa']) || []
+    );
+  }
+
+  get picture(): string {
+    return this.activeImage;
+  }
+
+  changeActiveImage(imageUrl: string) {
+    this.activeImage = imageUrl;
+  }
+
+  get description(): string {
+    if (!this.product) {
+      return '';
+    }
+    return this.product.description;
+  }
+
+  get price(): number {
+    if (!this.product) {
+      return 0;
+    }
+    return this.product.price;
+  }
+
+  get discount(): number {
+    if (!this.product) {
+      return 0;
+    }
+    return this.product.discount;
+  }
+
+  get reviewAmount(): number {
+    if (!this.product) {
+      return 0;
+    }
+    return this.product.review.length;
+  }
+
+  get colorRow(): string {
+    if (!this.product) {
+      return '';
+    }
+    return this.product.color.join('/');
+  }
+
+  get colors(): string[] {
+    return (this.product && this.product.color) || [];
+  }
+
+  get sizes(): string[] {
+    return (this.product && this.product.size) || [];
+  }
+
+  private getRating(product: Product): number {
+    if (product.review.length === 0) return 0;
+    let sumOfRatings = 0;
+    product.review.forEach((review) => {
+      sumOfRatings += review.rating;
+    });
+    return sumOfRatings / product.review.length;
+  }
+
+  get ratingImage(): string {
+    if (!this.product) return this.imageFolderPath + 'stars-0.png';
+    const rating = this.getRating(this.product);
+    switch (true) {
+      case rating >= 2:
+        return this.imageFolderPath + 'stars-2.png';
+      case rating >= 3:
+        return this.imageFolderPath + 'stars-3.png';
+      case rating >= 4:
+        return this.imageFolderPath + 'stars-4.png';
+      case rating >= 4.9:
+        return this.imageFolderPath + 'stars-5.png';
+      default:
+        return this.imageFolderPath + 'stars-1.png';
+    }
+  }
+
+  constructor(
+    private shopDataService: ShopDataService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.route.params
+      .pipe(
+        map((params) => +params['productId'] as number),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((productId) => this._initProductById(productId));
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private _initProductById(productId: number) {
+    this.shopDataService
+      .getProductById(productId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((product) => {
+        if (!product) {
+          this.redirectPage();
+          return;
+        }
+        this.product = product;
+        this.activeImage = product.imgUrl;
+        this.readMore = product.description.length > 190;
+      });
+  }
+
+  private redirectPage() {
+    this.router.navigate(['/404']);
+    this.product?.price;
+  }
+}
