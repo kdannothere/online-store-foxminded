@@ -1,17 +1,26 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ShopDataService } from '../../services/shop-data.service';
+import { Review } from '../../models/review';
 import { Product } from '../../models/product';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { CharactersLimitationPipe } from '../../pipes/characters-limitation.pipe';
 import { DiscountedPricePipe } from '../../pipes/discounted-price.pipe';
 import { CommonModule } from '@angular/common';
+import { ReviewComponent } from '../review/review.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule, CharactersLimitationPipe, DiscountedPricePipe],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReviewComponent,
+    CharactersLimitationPipe,
+    DiscountedPricePipe,
+  ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })
@@ -24,6 +33,12 @@ export class ProductDetailsComponent implements OnDestroy {
   descriptionLimit: number = this.minDescriptionLimit;
   activeImage: string = '';
   readMore: boolean = true;
+  ratingValue: number = 5;
+  ratingImageUrl: string = this.getImageByRating(this.ratingValue);
+  nameFieldValue: string = '';
+  reviewFieldValue: string = '';
+  nameFieldMaxLength = 50;
+  reviewFieldMaxLength = 2000;
 
   hideReadMore() {
     this.descriptionLimit = this.maxDescriptionLimit;
@@ -102,7 +117,7 @@ export class ProductDetailsComponent implements OnDestroy {
     return (this.product && this.product.size) || [];
   }
 
-  private getRating(product: Product): number {
+  private getMedianRating(product: Product): number {
     if (product.review.length === 0) return 0;
     let sumOfRatings = 0;
     product.review.forEach((review) => {
@@ -111,21 +126,41 @@ export class ProductDetailsComponent implements OnDestroy {
     return sumOfRatings / product.review.length;
   }
 
-  get ratingImage(): string {
+  getRatingImage(): string {
     if (!this.product) return this.imageFolderPath + 'stars-0.png';
-    const rating = this.getRating(this.product);
+    const medianRating = this.getMedianRating(this.product);
+    return this.getImageByRating(medianRating);
+  }
+
+  getImageByRating(rating: number): string {
     switch (true) {
-      case rating >= 2:
+      case rating >= 1 && rating < 2:
+        return this.imageFolderPath + 'stars-1.png';
+      case rating >= 2 && rating < 3:
         return this.imageFolderPath + 'stars-2.png';
-      case rating >= 3:
+      case rating >= 3 && rating < 4:
         return this.imageFolderPath + 'stars-3.png';
-      case rating >= 4:
+      case rating >= 4 && rating < 4.9:
         return this.imageFolderPath + 'stars-4.png';
-      case rating >= 4.9:
+      case rating >= 4.9 && rating < 6:
         return this.imageFolderPath + 'stars-5.png';
       default:
-        return this.imageFolderPath + 'stars-1.png';
+        return this.imageFolderPath + 'stars-0.png';
     }
+  }
+
+  changeRatingImage(rating: number) {
+    this.ratingImageUrl = this.getImageByRating(rating);
+    this.ratingValue = rating;
+  }
+
+  saveReview() {
+    const review: Review = {
+      author: this.nameFieldValue,
+      text: this.reviewFieldValue,
+      rating: this.ratingValue,
+    };
+    this.product?.review.push(review);
   }
 
   constructor(
@@ -165,6 +200,5 @@ export class ProductDetailsComponent implements OnDestroy {
 
   private redirectPage() {
     this.router.navigate(['/404']);
-    this.product?.price;
   }
 }

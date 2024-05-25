@@ -107,9 +107,10 @@ $color-gray-medium: rgb(162, 162, 162);
   }
 
   &__rating-stars {
-		width: 107px;
-		height: 22px;
-		background-repeat: no-repeat;
+    display: inline-block;
+    width: 107px;
+    height: 22px;
+    background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
   }
@@ -234,41 +235,96 @@ $color-gray-medium: rgb(162, 162, 162);
   }
 }
 .reviews {
+  padding-top: 48px;
+  padding-bottom: 200px;
+  padding-inline: 24px;
   &__title {
+    font-size: 32px;
+    padding-bottom: 64px;
   }
 
   &__list {
+    padding-bottom: 32px;
   }
 
   &__write {
   }
 }
-.review {
-  &__main {
-  }
 
-  &__author {
-  }
-
-  &__rating {
-  }
-
-  &__text {
-  }
-}
 .write {
+  padding-top: 32px;
+  font-size: 17px;
   &__title {
+    font-size: 28px;
+    padding-bottom: 32px;
   }
 
   &__user-name-form {
+    width: 200px;
+    padding-left: 24px;
+    margin-bottom: 24px;
+  }
+
+  &__user-name-form p {
+    padding-bottom: 8px;
+    cursor: default;
+  }
+
+  &__user-name-form input {
+    height: 22px;
+    border: 1px solid #000;
+    padding-left: 8px;
   }
 
   &__rating {
+    padding-left: 24px;
+    padding-bottom: 24px;
+  }
+
+  &__rating p {
+    padding-bottom: 16px;
+    cursor: default;
+  }
+
+  &__rating-stars {
+    display: grid;
+		grid-template-columns: 20% 20% 20% 20% 20%;
+    width: 107px;
+    height: 22px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    cursor: pointer;
   }
 
   &__text-form {
+    width: 200px;
+    padding-left: 24px;
   }
 
-  &__button-post {
+  &__text-form p {
+    padding-bottom: 8px;
+    cursor: default;
+  }
+
+  &__text-form textarea {
+		width: 500px;
+    height: 200px;
+		resize: none;
+		overflow-y: auto;
+    border: 1px solid #000;
+    padding-top: 8px;
+    padding-left: 8px;
+  }
+
+  &__button-submit {
+    width: fit-content;
+    margin-top: 24px;
+    margin-left: 24px;
+    padding: 4px 10px 4px 10px;
+    border-radius: 2px;
+    color: white;
+    background-color: gray;
+    cursor: pointer;
   }
 }

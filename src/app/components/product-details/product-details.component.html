@@ -44,7 +44,10 @@
       }}
     </h2>
     <div class="details__rating">
-      <span class="details__rating-stars" [style.background-image]="'url(' + ratingImage + ')'"></span>
+      <span
+        class="details__rating-stars"
+        [style.background-image]="'url(' + getRatingImage() + ')'"
+      ></span>
       <a class="details__review-amount" href="{{ url }}#reviews"
         >({{ reviewAmount }})</a
       >
@@ -125,19 +128,45 @@
 <div class="reviews" id="reviews">
   <div class="reviews__title">Reviews</div>
   <div class="reviews__list">
-    <div class="review">
-      <div class="review__main">
-        <div class="review__author">Author</div>
-        <div class="review__rating">5 stars</div>
-      </div>
-      <div class="review__text">Review text is here</div>
-    </div>
+    <ng-container *ngFor="let review of product?.review">
+      <app-review [review]="review"></app-review>
+    </ng-container>
   </div>
   <div class="reviews__write write" id="write-review">
     <p class="write__title">Write your review:</p>
-    <div class="write__user-name-form"></div>
-    <div class="write__rating"></div>
-    <div class="write__text-form"></div>
-    <div class="write__button-post">Post your review</div>
+    <div class="write__user-name-form" type="text">
+      <p>Your name:</p>
+      <input
+        [(ngModel)]="nameFieldValue"
+        type="text"
+        placeholder="Write your name here"
+				[maxLength]="nameFieldMaxLength"
+      />
+    </div>
+    <div class="write__rating">
+      <p>Your rating:</p>
+      <div
+        class="write__rating-stars"
+        [style.background-image]="'url(' + ratingImageUrl + ')'"
+      >
+        <span (click)="changeRatingImage(1)"></span>
+        <span (click)="changeRatingImage(2)"></span>
+        <span (click)="changeRatingImage(3)"></span>
+        <span (click)="changeRatingImage(4)"></span>
+        <span (click)="changeRatingImage(5)"></span>
+      </div>
+    </div>
+    <div class="write__text-form">
+      <p>Your review:</p>
+      <textarea
+        class="write__text-form"
+        placeholder="Write your review here"
+        [maxLength]="reviewFieldMaxLength"
+				[(ngModel)]="reviewFieldValue"
+      ></textarea>
+    </div>
+    <div class="write__button-submit"
+		(click)="saveReview()"
+		>Submit</div>
   </div>
 </div>
