@@ -11,7 +11,7 @@ export const data = [
     description:
       'Founded by retired cyclist Gervais Rioux in Montreal in 1989, Argon 18 has grown to distribute bikes aross the world and sponsors a number of professional cycling teams and triathletes. In 2019, Argo 18 sponsores Hugo Houle’s UCI WorldTour team Astana',
     shipping: 'Free shipping',
-    discountUntil: '2024-06-02T10:00:00',
+    discountUntil: '2024-06-22T10:00:00',
     isNew: true,
     color: ['Blue', 'Grey', 'Orange', 'Black'],
     size: ['S', 'L', 'XL', 'XXL'],
@@ -59,7 +59,7 @@ export const data = [
     description:
       'Banshee Bikes is a B.C.-based brand specializing in enduro, DH and trail bikes. With a long history on Vancouver’s North Shore, Banshees are designed tough to take the abuse of everyday riding, from enduro races to laps of the Whistler Bike Park',
     shipping: 'Free shipping',
-    discountUntil: '2024-06-02T10:00:00',
+    discountUntil: '2024-06-22T10:00:00',
     isNew: false,
     color: ['Blue', 'Grey'],
     size: ['S', 'XL'],
@@ -88,7 +88,7 @@ export const data = [
     description:
       'Founded by Paul Brodie in 1986, Brodie Bicycles began manufacturing custom steel hardtail mountain bikes in Vancouver. They expanded into making complete bikes and working with aluminum to expand their offerings. Brodie now has a catalogue of dozens of models from trail to commuter through to road and cyclocross',
     shipping: 'Free shipping',
-    discountUntil: '2024-06-02T10:00:00',
+    discountUntil: '2024-06-22T10:00:00',
     isNew: false,
     color: ['Blue', 'Orange'],
     size: ['L', 'XL'],
@@ -106,7 +106,7 @@ export const data = [
     description:
       'Devinci was established in Chicoutimi, Que in 1987 by two engineering students and have expanded to headquarters in Saguenay under new ownership. The company makes road and mountain bikes. Steve Smith was one of the company’s sponsored athletes at the time of his passing. The company also sponsors Unior Devinci Factory Team which competes in Enduro events. Devinci also make Montreal’s Bixi bikes and the ones for Toronto Bike Share',
     shipping: null,
-    discountUntil: '2024-06-02T10:00:00',
+    discountUntil: '2024-06-22T10:00:00',
     isNew: false,
     color: ['Blue', 'Green', 'Orange'],
     size: ['XS', 'S', 'L', 'XL'],
@@ -130,7 +130,7 @@ export const data = [
     description:
       'KindHuman is a made to order bike company based in Toronto that offers complete bikes. Kindhuman offers stock sized frames and gives customers the controls on choosing the groupset and components the bike is built with. Kindhuman have road, gravel and cyclocross models to choose from with the frames painted in Canada',
     shipping: null,
-    discountUntil: '2024-06-02T10:00:00',
+    discountUntil: '2024-06-22T10:00:00',
     isNew: true,
     color: ['Blue', 'Grey', 'Orange'],
     size: ['S', 'L', 'XL'],
@@ -164,7 +164,7 @@ export const data = [
     description:
       'KindHuman Pro is a made to order bike company based in Toronto that offers complete bikes. Kindhuman offers stock sized frames and gives customers the controls on choosing the groupset and components the bike is built with. Kindhuman have road, gravel and cyclocross models to choose from with the frames painted in Canada',
     shipping: null,
-    discountUntil: '2024-06-02T10:00:00',
+    discountUntil: '2024-06-22T10:00:00',
     isNew: true,
     color: ['Blue', 'Grey', 'Orange'],
     size: ['S', 'XL', 'XXL'],
@@ -193,7 +193,7 @@ export const data = [
     description:
       'Founded by Paul Brodie in 1986, Brodie Bicycles began manufacturing custom steel hardtail mountain bikes in Vancouver. They expanded into making complete bikes and working with aluminum to expand their offerings. Brodie now has a catalogue of dozens of models from trail to commuter through to road and cyclocross',
     shipping: 'Free shipping',
-    discountUntil: '2024-06-02T10:00:00',
+    discountUntil: '2024-06-22T10:00:00',
     isNew: false,
     color: ['Blue', 'Orange'],
     size: ['L', 'XL'],
@@ -217,7 +217,7 @@ export const data = [
     description:
       'Banshee Bikes is a B.C.-based brand specializing in enduro, DH and trail bikes. With a long history on Vancouver’s North Shore, Banshees are designed tough to take the abuse of everyday riding, from enduro races to laps of the Whistler Bike Park',
     shipping: 'Free shipping',
-    discountUntil: '2024-06-02T10:00:00',
+    discountUntil: '2024-06-22T10:00:00',
     isNew: false,
     color: ['Blue', 'Grey'],
     size: ['S', 'XL'],

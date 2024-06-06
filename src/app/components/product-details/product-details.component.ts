@@ -6,10 +6,10 @@ import { Product } from '../../models/product';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { CharactersLimitationPipe } from '../../pipes/characters-limitation.pipe';
-import { DiscountedPricePipe } from '../../pipes/discounted-price.pipe';
 import { CommonModule } from '@angular/common';
 import { ReviewComponent } from '../review/review.component';
 import { FormsModule } from '@angular/forms';
+import { PriceService } from '../../services/price.service';
 
 @Component({
   selector: 'app-product-details',
@@ -19,7 +19,6 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     ReviewComponent,
     CharactersLimitationPipe,
-    DiscountedPricePipe,
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
@@ -40,6 +39,13 @@ export class ProductDetailsComponent implements OnDestroy {
   nameFieldMaxLength = 50;
   reviewFieldMaxLength = 2000;
 
+  constructor(
+    public priceService: PriceService,
+    private shopDataService: ShopDataService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
   hideReadMore() {
     this.descriptionLimit = this.maxDescriptionLimit;
     this.readMore = false;
@@ -58,12 +64,10 @@ export class ProductDetailsComponent implements OnDestroy {
     return '/products/' + ((this.product && this.product.id) || 0);
   }
 
-  // needs a list of images
+  // it is a list of product images
   get images(): string[] {
-    return (
-      // 'aaa' text is needed to see the difference between images because these images are the same
-      (this.product && [this.product.imgUrl, this.product.imgUrl + 'aaa']) || []
-    );
+    if (!this.product) return [];
+    return [this.product.imgUrl, 'fakeSecondImageUrl'];
   }
 
   get picture(): string {
@@ -93,6 +97,13 @@ export class ProductDetailsComponent implements OnDestroy {
       return 0;
     }
     return this.product.discount;
+  }
+
+  get discountUntil(): string {
+    if (!this.product) {
+      return '';
+    }
+    return this.product.discountUntil;
   }
 
   get reviewAmount(): number {
@@ -162,12 +173,6 @@ export class ProductDetailsComponent implements OnDestroy {
     };
     this.product?.review.push(review);
   }
-
-  constructor(
-    private shopDataService: ShopDataService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
 
   ngOnInit() {
     this.route.params

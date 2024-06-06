@@ -1,0 +1,29 @@
+.wrapper {
+}
+.question {
+  font-size: 18px;
+	padding-bottom: 8px;
+  color: white;
+}
+.address-form {
+	display: flex;
+	flex-flow: row wrap;
+  &__field {
+		margin-right: 24px;
+		margin-bottom: 4px;
+		& input{
+			color: white;
+			caret-color: white;
+		}
+  }
+
+  &__label {
+    color: white;
+  }
+}
+.buttons {
+	margin-bottom: 24px;
+	& button{
+		color: white;
+	}
+}

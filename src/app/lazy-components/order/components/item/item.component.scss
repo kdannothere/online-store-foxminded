@@ -1,0 +1,112 @@
+@import "_colors.scss";
+
+.item {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  background-color: white;
+  border-radius: 10px;
+  cursor: default;
+
+  &__index {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-inline: 16px;
+  }
+  &__index-circle {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-pink;
+    border-radius: 50%;
+    font-size: 12px;
+    color: white;
+  }
+
+  &__picture {
+    width: 100px;
+    height: 100px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-right: 16px;
+  }
+
+  &__info {
+    display: flex;
+    flex-flow: column nowrap;
+    font-size: 14px;
+  }
+
+  &__name {
+    padding-top: 8px;
+		font-weight: 500;
+  }
+
+  &__description {
+    padding-top: 8px;
+  }
+
+  &__details {
+    padding-top: 20px;
+  }
+
+  &__price {
+    font-weight: 500;
+  }
+
+  &__discount {
+    padding-left: 16px;
+  }
+
+  &__discount-value {
+    color: $color-orange-normal;
+		font-weight: 500;
+  }
+  
+	&__quantity {
+    padding-left: 16px;
+  }
+
+  &__quantity-value {
+		font-weight: 500;
+  }
+}
+
+.item--in-summary{
+	margin-bottom: 24px;
+}
+
+.form-quantity {
+  padding-top: 20px;
+  &__body {
+    width: 150px;
+  }
+
+  &__label {
+    font-size: 12px;
+    color: white;
+  }
+
+  & input {
+    font-size: 16px;
+    color: white;
+    caret-color: white;
+
+    /* removing spin buttons:
+		Chrome, Safari, Edge, Opera */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    /* Firefox */
+    &[type="number"] {
+      -moz-appearance: textfield;
+      appearance: none;
+    }
+  }
+}

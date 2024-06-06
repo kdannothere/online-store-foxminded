@@ -1,5 +1,64 @@
 <div class="page-title">Contact</div>
 <div class="address">
-	<div class="address__prefix">Our address:</div>
-	<div class="address__text">750 Big Bay Point Rd, Barrie, ON L4M 4S6</div>
+  <div class="address__prefix">Our address:</div>
+  <div class="address__text">750 Big Bay Point Rd, Barrie, ON L4M 4S6</div>
+</div>
+<div class="contact-us">
+  <div class="contact-us__title">Contact Us:</div>
+  <div class="contact-us__form">
+    <mat-form-field class="contact-us__form-field" appearance="outline">
+      <mat-label class="contact-us__form-label">Name</mat-label>
+      <input
+        matInput
+        class="contact-us__form-input"
+        [name]="name"
+        [(ngModel)]="name"
+        required
+        type="text"
+      />
+    </mat-form-field>
+    <mat-form-field class="contact-us__form-field" appearance="outline">
+      <mat-label class="contact-us__form-label">Surname</mat-label>
+      <input
+        matInput
+        class="contact-us__form-input"
+        [name]="surname"
+        [(ngModel)]="surname"
+				required
+        type="text"
+      />
+    </mat-form-field>
+    <mat-form-field class="contact-us__form-field" appearance="outline">
+      <mat-label class="contact-us__form-label">Email</mat-label>
+      <input
+        matInput
+        class="contact-us__form-input"
+        [name]="email"
+        [(ngModel)]="email"
+        required
+        type="email"
+      />
+    </mat-form-field>
+    <mat-form-field class="contact-us__form-field" appearance="outline">
+      <mat-label class="contact-us__form-label">Message</mat-label>
+      <textarea
+        matInput
+        class="contact-us__form-input"
+        [maxLength]="1000"
+        [minLength]="20"
+        [name]="message"
+        [(ngModel)]="message"
+        required
+        type="text"
+      ></textarea>
+    </mat-form-field>
+    <button
+      class="contact-us__button"
+      mat-flat-button
+      color="primary"
+      (click)="sendMessage()"
+    >
+      Send
+    </button>
+  </div>
 </div>

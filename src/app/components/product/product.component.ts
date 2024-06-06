@@ -4,7 +4,7 @@ import { DiscountTimerComponent } from './discount-timer/discount-timer.componen
 import { CharactersLimitationPipe } from '../../pipes/characters-limitation.pipe';
 import { Product } from '../../models/product';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
-import { DiscountedPricePipe } from '../../pipes/discounted-price.pipe';
+import { PriceService } from '../../services/price.service';
 
 @Component({
   selector: 'app-product',
@@ -14,7 +14,6 @@ import { DiscountedPricePipe } from '../../pipes/discounted-price.pipe';
     ProductDetailsComponent,
     DiscountTimerComponent,
     CharactersLimitationPipe,
-    DiscountedPricePipe,
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',
@@ -22,6 +21,9 @@ import { DiscountedPricePipe } from '../../pipes/discounted-price.pipe';
 export class ProductComponent {
   @Input() product!: Product;
   @Output() clicked = new EventEmitter<void>();
+
+  constructor(public priceService: PriceService) {}
+
   handleClick() {
     this.clicked.emit();
   }
@@ -36,7 +38,7 @@ export class ProductComponent {
     const activeTags = [
       this.isShippingTagActive(),
       this.product.isNew,
-      this.isDiscountTagActive(),
+      this.priceService.isDiscountActive(this.product.discountUntil),
     ].filter(Boolean).length;
     let classes = 'tag'; // Base class applied to every tag
     switch (activeTags) {
@@ -58,9 +60,9 @@ export class ProductComponent {
     return this.product.shipping !== null;
   }
 
-  isDiscountTagActive(): boolean {
-    const currentTime = new Date().getTime();
-    const discountTime = new Date(this.product.discountUntil).getTime();
-    return discountTime > currentTime;
-  }
+  // isDiscountTagActive(): boolean {
+  //   const currentTime = new Date().getTime();
+  //   const discountTime = new Date(this.product.discountUntil).getTime();
+  //   return discountTime > currentTime;
+  // }
 }

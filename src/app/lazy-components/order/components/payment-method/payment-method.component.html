@@ -1,0 +1,23 @@
+<div class="wrapper">
+  <p class="question">How would you like to pay?</p>
+  <div class="payment-form">
+    <mat-radio-group
+      [formControl]="payment"
+      aria-label="Select a payment method"
+    >
+      <mat-radio-button [value]="paymentOptions.card">{{
+        paymentOptions.card
+      }}</mat-radio-button>
+      <mat-radio-button [value]="paymentOptions.paypal">{{
+        paymentOptions.paypal
+      }}</mat-radio-button>
+      <mat-radio-button [value]="paymentOptions.cash">{{
+        paymentOptions.cash
+      }}</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class="buttons">
+    <button mat-button>Back</button>
+    <button mat-button>Next</button>
+  </div>
+</div>

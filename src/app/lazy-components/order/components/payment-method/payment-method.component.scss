@@ -1,0 +1,21 @@
+.wrapper {
+}
+.question {
+  font-size: 18px;
+  padding-bottom: 8px;
+  color: white;
+}
+.payment-form {
+  ::ng-deep .mdc-label {
+    color: white;
+		cursor: pointer;
+  }
+}
+
+.buttons {
+  margin-top: 16px;
+  margin-bottom: 24px;
+  & button {
+    color: white;
+  }
+}

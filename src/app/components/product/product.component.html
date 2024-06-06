@@ -18,7 +18,7 @@
   <div class="product__details">
     <p class="product__details-price">
       <span
-        >{{ product.price | discountedPrice: product.discount | currency : "EUR" : "symbol" : "1.0-2" }}
+        >{{ priceService.getDiscountedPrice(product.price, product.discount, product.discountUntil) | currency : "EUR" : "symbol" : "1.0-2" }}
       </span>
     </p>
     <p *ngIf="product.discount > 0" class="product__details-price-original">
@@ -32,7 +32,7 @@
       product.shipping
     }}</span>
     <span *ngIf="product.isNew" [ngClass]="getTagClass()">New</span>
-    <span *ngIf="isDiscountTagActive()" [ngClass]="getTagClass()">
+    <span *ngIf="priceService.isDiscountActive(product.discountUntil)" [ngClass]="getTagClass()">
       <app-discount-timer
         [discountUntil]="product.discountUntil"
       ></app-discount-timer>

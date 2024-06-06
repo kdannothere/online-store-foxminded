@@ -1,21 +1,58 @@
-.page-title{
-	width: 100%;
-	font-size: 32px;
-	text-align: center;
-	padding-block: 72px;
+.page-title {
+  width: 100%;
+  font-size: 32px;
+  text-align: center;
+  padding-block: 72px;
 }
 
 .address {
-	padding-top: 64px;
-	margin-left: 32px;
-	padding-inline: 32px;
-	font-size: 18px;
+  padding-top: 64px;
+  margin-left: 32px;
+  padding-inline: 32px;
+  font-size: 18px;
 
-	&__prefix {
-	}
-	
-	&__text {
-		font-weight: 500;
-		padding-top: 16px;
-	}
+  &__prefix {
+  }
+
+  &__text {
+    font-weight: 500;
+    padding-top: 16px;
+  }
+}
+
+.contact-us {
+  padding-top: 64px;
+  margin-left: 32px;
+  padding-inline: 32px;
+  padding-bottom: 64px;
+
+  &__title {
+    font-size: 18px;
+  }
+
+  &__form {
+    width: 440px;
+    display: flex;
+    flex-flow: column nowrap;
+    padding-top: 32px;
+  }
+
+  &__form-field {
+    & textarea {
+      min-height: 120px;
+      resize: none;
+    }
+  }
+
+  &__form-label {
+  }
+
+  &__form-input {
+  }
+
+  &__form-textarea {
+  }
+
+  &__button {
+  }
 }

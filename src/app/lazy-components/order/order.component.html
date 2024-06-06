@@ -1,0 +1,25 @@
+<div class="wrapper">
+  <div class="goods-block">
+    <ng-container *ngIf="cartItems$ | async as items; else loading">
+      <app-goods-selection [items]="items"></app-goods-selection>
+      <div *ngIf="items.length === 0">Your cart is empty.</div>
+    </ng-container>
+    <ng-template #loading>Loading data...</ng-template>
+  </div>
+  <div class="delivery-address-block">
+    <app-delivery-address></app-delivery-address>
+  </div>
+  <div class="payment-block">
+    <app-payment-method></app-payment-method>
+  </div>
+  <div class="delivery-date-block">
+    <app-delivery-date></app-delivery-date>
+  </div>
+  <div class="summery-block">
+    <ng-container *ngIf="cartItems$ | async as items; else loading">
+      <app-summary [items]="items"></app-summary>
+      <div *ngIf="items.length === 0">Your cart is empty.</div>
+    </ng-container>
+    <ng-template #loading>Loading data...</ng-template>
+  </div>
+</div>

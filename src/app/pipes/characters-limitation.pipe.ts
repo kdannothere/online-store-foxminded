@@ -8,7 +8,7 @@ export class CharactersLimitationPipe implements PipeTransform {
   transform(text: string, limit: number = 35, ellipsis: boolean = true): string {
     if (text.length <= limit) return text;
     let result = text.substring(0, limit);
-    if (ellipsis) result += '...';
+    if (ellipsis) result += ' ...';
     return result;
   }
 }

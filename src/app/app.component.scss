@@ -1,15 +1,19 @@
+@import "colors";
+
 .header {
+	height: 50px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: end;
+	align-items: center;
   padding-right: 100px;
-  padding-top: 32px;
 
   &__menu {
     & * {
-      color: rgb(255, 165, 0);
+      color: $color-orange-normal;
+			font-size: 18px;
       &:hover {
-        color: rgb(255, 69, 0);
+        color: $color-orange-red;
       }
     }
   }

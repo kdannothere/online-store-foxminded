@@ -1,0 +1,17 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  width: 600px;
+  margin-bottom: 24px;
+}
+.title{
+	color: white;
+	font-size: 16px;
+	padding-bottom: 16px;
+}
+.button-next {
+  & button {
+    color: white;
+  }
+}
