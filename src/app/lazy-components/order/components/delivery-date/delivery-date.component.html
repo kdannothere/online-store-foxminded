@@ -2,7 +2,7 @@
   <p class="question">When would you like to get your order?</p>
   <div class="date-form">
     <mat-radio-group
-      [formControl]="dateOption"
+      [formControl]="deliveryDateGroup.controls.dateOption"
       aria-label="Select a payment method"
     >
       <mat-radio-button [value]="dateOptions.today">{{
@@ -18,7 +18,7 @@
     <div *ngIf="showCalendar" class="date-form__calendar-block">
       <mat-form-field>
         <mat-label>Choose a date</mat-label>
-        <input matInput [formControl]="date" [matDatepicker]="picker" />
+        <input matInput [formControl]="deliveryDateGroup.controls.date" [matDatepicker]="picker" />
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle
 					matIconSuffix
@@ -29,7 +29,14 @@
     </div>
   </div>
   <div class="buttons">
-    <button mat-button>Back</button>
-    <button mat-button>Next</button>
+    <button mat-button (click)="emitBackClicked()">Back</button>
+    <button
+      mat-button
+      [disabled]="!(isDateGroupValid$ | async)"
+      [ngStyle]="{ opacity: (isDateGroupValid$ | async) ? '1' : '0.6' }"
+      (click)="emitNextClicked()"
+    >
+      Next
+    </button>
   </div>
 </div>

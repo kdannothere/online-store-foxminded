@@ -5,16 +5,22 @@
       <mat-label class="address-form__label">Country</mat-label>
       <input
         matInput
-        [formControl]="country"
+        [formControl]="deliveryAddressGroup.controls.country"
         required
         type="text"
       />
+      <!-- <div *ngIf="deliveryAddressGroup.controls.country.hasError('required')">
+			Country is required.
+		</div>
+		<div *ngIf="deliveryAddressGroup.controls.country.hasError('invalidLength')">
+			Country length must be between 1 and 32 characters.
+		</div> -->
     </mat-form-field>
     <mat-form-field class="address-form__field" appearance="outline">
       <mat-label class="address-form__label">City</mat-label>
       <input
         matInput
-        [formControl]="city"
+        [formControl]="deliveryAddressGroup.controls.city"
         required
         type="text"
       />
@@ -23,14 +29,21 @@
       <mat-label class="address-form__label">Address</mat-label>
       <input
         matInput
-        [formControl]="address"
+        [formControl]="deliveryAddressGroup.controls.address"
         required
         type="text"
       />
     </mat-form-field>
   </div>
-	<div class="buttons">
-		<button mat-button>Back</button>
-		<button mat-button>Next</button>
-	</div>
+  <div class="buttons">
+    <button mat-button (click)="emitBackClicked()">Back</button>
+    <button
+      mat-button
+      [disabled]="!(isAddressGroupValid$ | async)"
+      [ngStyle]="{ opacity: (isAddressGroupValid$ | async) ? '1' : '0.6' }"
+      (click)="emitNextClicked()"
+    >
+      Next
+    </button>
+  </div>
 </div>

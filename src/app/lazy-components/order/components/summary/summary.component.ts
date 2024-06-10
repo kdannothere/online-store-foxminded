@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { ItemComponent } from '../item/item.component';
@@ -16,5 +16,21 @@ export class SummaryComponent {
   @Input() deliveryAddress: string = '';
   @Input() paymentMethod: string = '';
   @Input() deliveryDate: string = '';
-  readonly inSummary: boolean = true;
+  @Input() itemsQuantity!: any;
+  readonly inSummary = true;
+  @Output() backClicked = new EventEmitter();
+  @Output() resetClicked = new EventEmitter();
+  @Output() submitClicked = new EventEmitter();
+
+  emitBackClicked() {
+    this.backClicked.emit();
+  }
+
+  emitResetClicked() {
+    this.resetClicked.emit();
+  }
+
+  emitSubmitClicked() {
+    this.resetClicked.emit();
+  }
 }

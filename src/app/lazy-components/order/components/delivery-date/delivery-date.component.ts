@@ -1,21 +1,27 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ReactiveFormsModule,
+  FormControl,
+  Validators,
+  FormGroup,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { Observable, map, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-delivery-date',
   standalone: true,
   imports: [
-		CommonModule,
+    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-		MatInputModule,
+    MatInputModule,
     MatDatepickerModule,
     MatRadioModule,
     MatButtonModule,
@@ -25,22 +31,47 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './delivery-date.component.scss',
 })
 export class DeliveryDateComponent implements OnInit {
-  dateOption!: FormControl;
-  date!: FormControl;
-  dateOptions = {
-    today: 'Today',
-    tomorrow: 'Tomorrow',
-    choose: 'Choose a date from the calendar',
+  @Input() deliveryDateGroup!: FormGroup<{
+    dateOption: FormControl<string | null>;
+    date: FormControl<string | null>;
+  }>;
+  @Input() dateOptions!: {
+    today: string;
+    tomorrow: string;
+    choose: string;
   };
-	get showCalendar():boolean {
-		return this.dateOption.value.toString() === this.dateOptions.choose;
-	}
+  @Output() nextClicked = new EventEmitter();
+  @Output() backClicked = new EventEmitter();
+
+  isDateGroupValid$!: Observable<boolean>;
+
+  isDateGroupValid(): boolean {
+    const controls = this.deliveryDateGroup.controls;
+    if (controls.dateOption.value === this.dateOptions.choose) {
+      return controls.date.valid;
+    }
+    return controls.dateOption.valid;
+  }
+
+  emitNextClicked() {
+    this.nextClicked.emit();
+  }
+
+  emitBackClicked() {
+    this.backClicked.emit();
+  }
+
+  get showCalendar(): boolean {
+    return (
+      (this.deliveryDateGroup.controls.dateOption.value || '') ===
+      this.dateOptions.choose
+    );
+  }
 
   ngOnInit(): void {
-    this.dateOption = new FormControl(
-      this.dateOptions.choose,
-      Validators.required
+    this.isDateGroupValid$ = this.deliveryDateGroup.valueChanges.pipe(
+      startWith(true), // ensures that validity is checked on init
+      map(() => this.isDateGroupValid())
     );
-    this.date = new FormControl('', Validators.required);
   }
 }

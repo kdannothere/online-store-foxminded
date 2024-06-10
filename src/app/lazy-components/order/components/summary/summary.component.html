@@ -5,6 +5,7 @@
     [item]="item"
     [itemIndex]="i"
     [inSummary]="inSummary"
+		[quantity]="itemsQuantity.controls[i]"
   >
   </app-item>
   <div class="info">
@@ -22,8 +23,8 @@
     </p>
   </div>
   <div class="buttons">
-    <button class="buttons__back" mat-button>Back</button>
-    <button class="buttons__reset" mat-button>Reset</button>
-    <button class="buttons__submit" mat-button>Submit</button>
+    <button class="buttons__back" (click)="emitBackClicked()" mat-button>Back</button>
+    <button class="buttons__reset" (click)="emitResetClicked()" mat-button>Reset</button>
+    <button class="buttons__submit" (click)="emitSubmitClicked()" mat-button>Submit</button>
   </div>
 </div>
