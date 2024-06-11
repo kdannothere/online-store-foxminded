@@ -11,9 +11,7 @@
       <input
         matInput
         class="contact-us__form-input"
-        [name]="name"
-        [(ngModel)]="name"
-        required
+        [formControl]="contactForm.controls.name"
         type="text"
       />
     </mat-form-field>
@@ -22,9 +20,7 @@
       <input
         matInput
         class="contact-us__form-input"
-        [name]="surname"
-        [(ngModel)]="surname"
-				required
+        [formControl]="contactForm.controls.surname"
         type="text"
       />
     </mat-form-field>
@@ -33,9 +29,7 @@
       <input
         matInput
         class="contact-us__form-input"
-        [name]="email"
-        [(ngModel)]="email"
-        required
+        [formControl]="contactForm.controls.email"
         type="email"
       />
     </mat-form-field>
@@ -44,11 +38,7 @@
       <textarea
         matInput
         class="contact-us__form-input"
-        [maxLength]="1000"
-        [minLength]="20"
-        [name]="message"
-        [(ngModel)]="message"
-        required
+        [formControl]="contactForm.controls.message"
         type="text"
       ></textarea>
     </mat-form-field>
