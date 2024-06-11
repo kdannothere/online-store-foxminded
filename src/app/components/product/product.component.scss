@@ -34,12 +34,13 @@
     height: 50px;
     top: 8px;
     left: 8px;
-    padding: 4px;
     border-radius: 50%;
     color: #fff;
+		font-size: 14px;
   }
 
   &__discount-value {
+		transform: translateY(12px);
   }
 
   &__description {

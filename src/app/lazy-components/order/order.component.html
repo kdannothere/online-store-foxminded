@@ -1,97 +1,112 @@
-<form class="wrapper" [formGroup]="orderForm">
-  <div
-    class="goods block"
-    [ngClass]="{ 'block--active': activeBlock === blocks.goods }"
-  >
-    <div class="block__header">
-      <span class="block__number">1</span>
-      <span class="block__title">Your products</span>
-    </div>
-    <div class="block__body" *ngIf="activeBlock === blocks.goods">
-      <ng-container *ngIf="cartItems$ | async as items; else loading">
-        <app-goods-selection
-          [items]="items"
-          [itemsQuantity]="orderForm.get('itemsQuantity')"
-          (nextClicked)="nextEventHandler()"
-        ></app-goods-selection>
-        <div *ngIf="items.length === 0">Your cart is empty.</div>
-      </ng-container>
-      <ng-template #loading>Loading data...</ng-template>
-    </div>
-  </div>
-  <div
-    class="delivery-address block"
-    [ngClass]="{ 'block--active': activeBlock === blocks.address }"
-  >
-    <div class="block__header">
-      <span class="block__number">2</span>
-      <span class="block__title">Delivery address</span>
-    </div>
-    <div class="block__body" *ngIf="activeBlock === blocks.address">
-      <app-delivery-address
-        [deliveryAddressGroup]="orderForm.controls.deliveryAddressGroup"
-        (nextClicked)="nextEventHandler()"
-        (backClicked)="backEventHandler()"
-      ></app-delivery-address>
-    </div>
-  </div>
-  <div
-    class="payment block"
-    [ngClass]="{ 'block--active': activeBlock === blocks.payment }"
-  >
-    <div class="block__header">
-      <span class="block__number">3</span>
-      <span class="block__title">Payment method</span>
-    </div>
-    <div class="block__body" *ngIf="activeBlock === blocks.payment">
-      <app-payment-method
-        [payment]="orderForm.controls.payment"
-        [paymentOptions]="paymentOptions"
-        (nextClicked)="nextEventHandler()"
-        (backClicked)="backEventHandler()"
-      ></app-payment-method>
-    </div>
-  </div>
-  <div
-    class="delivery-date block"
-    [ngClass]="{ 'block--active': activeBlock === blocks.date }"
-  >
-    <div class="block__header">
-      <span class="block__number">4</span>
-      <span class="block__title">Delivery date</span>
-    </div>
-    <div class="block__body" *ngIf="activeBlock === blocks.date">
-      <app-delivery-date
-        [deliveryDateGroup]="orderForm.controls.deliveryDateGroup"
-        [dateOptions]="dateOptions"
-        (nextClicked)="nextEventHandler()"
-        (backClicked)="backEventHandler()"
-      ></app-delivery-date>
-    </div>
-  </div>
-  <div
-    class="summary block"
-    [ngClass]="{ 'block--active': activeBlock === blocks.summary }"
-  >
-    <div class="block__header">
-      <span class="block__number">5</span>
-      <span class="block__title">Summary</span>
-    </div>
-    <div class="block__body" *ngIf="activeBlock === blocks.summary">
-      <ng-container *ngIf="cartItems$ | async as items; else loading">
-        <app-summary
-          [items]="items"
-          [itemsQuantity]="orderForm.get('itemsQuantity')"
-          [deliveryAddress]="deliveryAddress"
-          [paymentMethod]="(orderForm.controls.payment.value || '')"
-          [deliveryDate]="deliveryDate"
-          (backClicked)="backEventHandler()"
-          (resetClicked)="resetEventHandler()"
-          (submitClicked)="submitEventHandler()"
-        ></app-summary>
-        <div *ngIf="items.length === 0">Your cart is empty.</div>
-      </ng-container>
-      <ng-template #loading>Loading data...</ng-template>
-    </div>
-  </div>
-</form>
+<div class="wrapper">
+  <ng-container *ngIf="cartItems$ | async as items; else loading">
+    <form
+      class="order"
+      [formGroup]="orderForm"
+      *ngIf="items.length > 0; else seeOurProducts"
+    >
+      <div
+        class="goods block"
+        [ngClass]="{ 'block--active': activeBlock === blocks.goods }"
+      >
+        <div class="block__header">
+          <span class="block__number">1</span>
+          <span class="block__title">Your products</span>
+        </div>
+        <div class="block__body" *ngIf="activeBlock === blocks.goods">
+          <ng-container *ngIf="cartItems$ | async as items; else loading">
+            <app-goods-selection
+              [items]="items"
+              [itemsQuantity]="orderForm.get('itemsQuantity')"
+              (nextClicked)="nextEventHandler()"
+            ></app-goods-selection>
+            <div *ngIf="items.length === 0">Your cart is empty.</div>
+          </ng-container>
+          <ng-template #loading>Loading data...</ng-template>
+        </div>
+      </div>
+      <div
+        class="delivery-address block"
+        [ngClass]="{ 'block--active': activeBlock === blocks.address }"
+      >
+        <div class="block__header">
+          <span class="block__number">2</span>
+          <span class="block__title">Delivery address</span>
+        </div>
+        <div class="block__body" *ngIf="activeBlock === blocks.address">
+          <app-delivery-address
+            [deliveryAddressGroup]="orderForm.controls.deliveryAddressGroup"
+            (nextClicked)="nextEventHandler()"
+            (backClicked)="backEventHandler()"
+          ></app-delivery-address>
+        </div>
+      </div>
+      <div
+        class="payment block"
+        [ngClass]="{ 'block--active': activeBlock === blocks.payment }"
+      >
+        <div class="block__header">
+          <span class="block__number">3</span>
+          <span class="block__title">Payment method</span>
+        </div>
+        <div class="block__body" *ngIf="activeBlock === blocks.payment">
+          <app-payment-method
+            [payment]="orderForm.controls.payment"
+            [paymentOptions]="paymentOptions"
+            (nextClicked)="nextEventHandler()"
+            (backClicked)="backEventHandler()"
+          ></app-payment-method>
+        </div>
+      </div>
+      <div
+        class="delivery-date block"
+        [ngClass]="{ 'block--active': activeBlock === blocks.date }"
+      >
+        <div class="block__header">
+          <span class="block__number">4</span>
+          <span class="block__title">Delivery date</span>
+        </div>
+        <div class="block__body" *ngIf="activeBlock === blocks.date">
+          <app-delivery-date
+            [deliveryDateGroup]="orderForm.controls.deliveryDateGroup"
+            [dateOptions]="dateOptions"
+            (nextClicked)="nextEventHandler()"
+            (backClicked)="backEventHandler()"
+          ></app-delivery-date>
+        </div>
+      </div>
+      <div
+        class="summary block"
+        [ngClass]="{ 'block--active': activeBlock === blocks.summary }"
+      >
+        <div class="block__header">
+          <span class="block__number">5</span>
+          <span class="block__title">Summary</span>
+        </div>
+        <div class="block__body" *ngIf="activeBlock === blocks.summary">
+          <ng-container *ngIf="cartItems$ | async as items; else loading">
+            <app-summary
+              [items]="items"
+              [itemsQuantity]="orderForm.get('itemsQuantity')"
+              [deliveryAddress]="deliveryAddress"
+              [paymentMethod]="orderForm.controls.payment.value || ''"
+              [deliveryDate]="deliveryDate"
+              (backClicked)="backEventHandler()"
+              (resetClicked)="resetEventHandler()"
+              (submitClicked)="submitEventHandler()"
+            ></app-summary>
+            <div *ngIf="items.length === 0">Your cart is empty.</div>
+          </ng-container>
+          <ng-template #loading>Loading data...</ng-template>
+        </div>
+      </div>
+    </form>
+  </ng-container>
+  <ng-template #loading>Loading data...</ng-template>
+  <ng-template #seeOurProducts>
+		<div class="see-products">
+			<div class="see-products__info">Your cart is empty, please press the button below to see all our products &#59;&#41;</div>
+			<a href="home" class="see-products__button"><button mat-button>See our products</button></a>
+		</div>
+	</ng-template>
+</div>

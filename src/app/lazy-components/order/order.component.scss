@@ -1,11 +1,15 @@
 @import "colors";
 
 .wrapper {
+  position: relative;
   min-height: 100%;
   padding-top: 80px;
   padding-inline: 32px;
   background-color: blueviolet;
   padding-bottom: 80px;
+}
+.order {
+  width: 100%;
 }
 .block {
   border-left: 1px solid $color-pink;
@@ -56,4 +60,27 @@
 
 .summary {
   border: none;
+}
+
+.see-products {
+	width: 100%;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+  &__info {
+		color: white;
+		font-size: 18px;
+		padding-bottom: 32px;
+  }
+
+	button{
+		color: $color-orange-normal;
+		border: 2px solid $color-blue;
+		&:hover{
+			color: $color-orange-red;
+		}
+	}
+  &__button {
+		
+  }
 }

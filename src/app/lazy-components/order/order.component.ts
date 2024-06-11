@@ -17,6 +17,8 @@ import { DeliveryDateComponent } from './components/delivery-date/delivery-date.
 import { PaymentMethodComponent } from './components/payment-method/payment-method.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { ValidationService } from '../../services/validation.service';
+import { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -24,6 +26,7 @@ import { ValidationService } from '../../services/validation.service';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    MatButtonModule,
     GoodsSelectionComponent,
     DeliveryAddressComponent,
     DeliveryDateComponent,
@@ -33,12 +36,6 @@ import { ValidationService } from '../../services/validation.service';
   templateUrl: './order.component.html',
   styleUrl: './order.component.scss',
 })
-// todo
-/*
-2. validation for order and contact forms
-3. new page Thank you for ordering
-4. create button 'Create new order'
-*/
 export class OrderComponent {
   cartItems$: Observable<Item[]>;
 
@@ -78,7 +75,9 @@ export class OrderComponent {
     this.orderForm = this.getEmptyOrderForm();
   }
 
-  submitEventHandler() {}
+  submitEventHandler() {
+		this.router.navigate(['/order/thanks']);
+	}
 
   get deliveryAddress(): string {
     return (
@@ -110,9 +109,18 @@ export class OrderComponent {
     return new FormGroup({
       itemsQuantity: new FormArray([]),
       deliveryAddressGroup: new FormGroup({
-        country: new FormControl('', [Validators.required, this.validationService.isLengthValid(1, 33)]),
-        city: new FormControl('', [Validators.required, this.validationService.isLengthValid(1, 50)]),
-        address: new FormControl('', [Validators.required, this.validationService.isLengthValid(1, 100)]),
+        country: new FormControl('', [
+          Validators.required,
+          this.validationService.isLengthValid(1, 33),
+        ]),
+        city: new FormControl('', [
+          Validators.required,
+          this.validationService.isLengthValid(1, 50),
+        ]),
+        address: new FormControl('', [
+          Validators.required,
+          this.validationService.isLengthValid(1, 100),
+        ]),
       }),
       deliveryDateGroup: new FormGroup({
         dateOption: new FormControl(
@@ -125,7 +133,11 @@ export class OrderComponent {
     });
   }
 
-  constructor(private shopDataService: ShopDataService, private validationService: ValidationService) {
+  constructor(
+    private shopDataService: ShopDataService,
+    private validationService: ValidationService,
+    private router: Router
+  ) {
     // mock items
     this.cartItems$ = this.shopDataService.getAllProducts().pipe(
       map((products: Product[]) => {
@@ -134,7 +146,7 @@ export class OrderComponent {
             const item: Item = { ...product, quantity: 1 };
             return item;
           })
-          .filter((item) => item.id < 3);
+          .filter((item) => item.id < 2);
       })
     );
   }

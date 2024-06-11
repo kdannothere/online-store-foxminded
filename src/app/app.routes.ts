@@ -6,13 +6,20 @@ import { Page404Component } from './components/page-404/page-404.component';
 
 export const routes: Routes = [
   {
-    path: '', // write 'order' later
+    path: 'order',
     loadComponent: () =>
       import('./lazy-components/order/order.component').then(
         (m) => m.OrderComponent
       ),
   },
-  { path: 'home', component: HomeComponent },
+  {
+    path: 'order/thanks',
+    loadComponent: () =>
+      import('./lazy-components/order/thanks/thanks.component').then(
+        (m) => m.ThanksComponent
+      ),
+  },
+  { path: '', component: HomeComponent },
   { path: 'products/:productId', component: ProductDetailsComponent },
   { path: 'contact', component: ContactComponent },
   { path: '**', component: Page404Component },

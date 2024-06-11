@@ -31,6 +31,6 @@ export class SummaryComponent {
   }
 
   emitSubmitClicked() {
-    this.resetClicked.emit();
+    this.submitClicked.emit();
   }
 }
