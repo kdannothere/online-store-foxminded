@@ -1,0 +1,23 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+.title {
+  font-size: 30px;
+  padding-block: 50px;
+  font-weight: 600;
+}
+.action-list {
+  padding-top: 50px;
+}
+.action {
+  font-size: 17px;
+  color: blueviolet;
+  margin-bottom: 16px;
+  cursor: pointer;
+  &:hover {
+    color: orange;
+  }
+}

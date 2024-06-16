@@ -11,8 +11,18 @@ export class ShopDataService {
     return of(data);
   }
 
+  getUniqueId(): number {
+    return data.length + 1;
+  }
+
   getProductById(id: number): Observable<Product | null> {
     const item = data.find((item) => item.id === id);
     return item ? of(item) : of(null); // Return product or null when product is not found
   }
+
+  addProduct(product: Product) {}
+
+  // updateProduct(product: Product) {}
+
+  // deleteProduct(product: Product) {}
 }

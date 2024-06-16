@@ -1,0 +1,160 @@
+<div class="wrapper">
+  <div class="title">Add new product</div>
+  <form class="product-form">
+    <mat-form-field
+      class="product-form__container product-form__form-field"
+      appearance="outline"
+    >
+      <mat-label class="product-form__label">Image URL</mat-label>
+      <input
+        matInput
+        [formControl]="productForm.controls.imageUrl"
+        type="text"
+      />
+    </mat-form-field>
+    <img
+      class="product-form__image-preview"
+      *ngIf="productForm.controls.imageUrl.value"
+      src="{{productForm.controls.imageUrl.value}}"
+      alt="Image Preview"
+    >
+    <mat-form-field
+      class="product-form__container product-form__form-field"
+      appearance="outline"
+    >
+      <mat-label class="product-form__label">Price</mat-label>
+      <input
+        matInput
+        [formControl]="productForm.controls.price"
+        type="number"
+      />
+    </mat-form-field>
+    <mat-form-field
+      class="product-form__container product-form__form-field"
+      appearance="outline"
+    >
+      <mat-label class="product-form__label">Discount</mat-label>
+      <input
+        matInput
+        [formControl]="productForm.controls.discount"
+        type="number"
+      />
+    </mat-form-field>
+    <mat-radio-group
+      class="product-form__container product-form__radio-group"
+      [formControl]="productForm.controls.main"
+      aria-label="main"
+    >
+      <div class="radio-group-label">Is it a main product?</div>
+      <div class="radio-group-buttons">
+        <mat-radio-button [value]="true">Yes</mat-radio-button>
+        <mat-radio-button [value]="false">No</mat-radio-button>
+      </div>
+    </mat-radio-group>
+    <mat-form-field
+      class="product-form__container product-form__form-field"
+      appearance="outline"
+    >
+      <mat-label class="product-form__label">Shop</mat-label>
+      <input matInput [formControl]="productForm.controls.shop" type="text" />
+    </mat-form-field>
+    <mat-form-field
+      class="product-form__container product-form__form-field"
+      appearance="outline"
+    >
+      <mat-label class="product-form__label">Name</mat-label>
+      <input matInput [formControl]="productForm.controls.name" type="text" />
+    </mat-form-field>
+    <mat-form-field
+      class="product-form__container product-form__form-field"
+      appearance="outline"
+    >
+      <mat-label class="product-form__label">Description</mat-label>
+      <input
+        matInput
+        [formControl]="productForm.controls.description"
+        type="text"
+      />
+    </mat-form-field>
+    <mat-radio-group
+      class="product-form__container product-form__radio-group"
+      [formControl]="productForm.controls.shipping"
+      aria-label="shipping"
+    >
+      <div class="radio-group-label">Free shipping?</div>
+      <div class="radio-group-buttons">
+        <mat-radio-button [value]="'Free shipping'">Yes</mat-radio-button>
+        <mat-radio-button [value]="null">No</mat-radio-button>
+      </div>
+    </mat-radio-group>
+    <mat-form-field
+      class="product-form__container product-form__form-field-date"
+      appearance="outline"
+    >
+      <mat-label class="product-form__label">Discount until</mat-label>
+      <input
+        matInput
+        [formControl]="productForm.controls.discountUntil"
+        type="text"
+        [matDatepicker]="picker"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-radio-group
+      class="product-form__container product-form__radio-group"
+      [formControl]="productForm.controls.isNew"
+      aria-label="isNew"
+    >
+      <div class="radio-group-label">Is it a new product?</div>
+      <div class="radio-group-buttons">
+        <mat-radio-button [value]="true">Yes</mat-radio-button>
+        <mat-radio-button [value]="false">No</mat-radio-button>
+      </div>
+    </mat-radio-group>
+    <section class="product-form__container product-form__section">
+      <div class="product-form__label">Available colors:</div>
+      <mat-checkbox [formControl]="productForm.controls.color.controls.green"
+        >Green</mat-checkbox
+      >
+      <mat-checkbox [formControl]="productForm.controls.color.controls.grey"
+        >Grey</mat-checkbox
+      >
+      <mat-checkbox [formControl]="productForm.controls.color.controls.blue"
+        >Blue</mat-checkbox
+      >
+      <mat-checkbox [formControl]="productForm.controls.color.controls.black"
+        >Black</mat-checkbox
+      >
+      <mat-checkbox [formControl]="productForm.controls.color.controls.orange"
+        >Orange</mat-checkbox
+      >
+    </section>
+    <section class="product-form__container product-form__section">
+      <div class="product-form__label">Available sizes:</div>
+      <mat-checkbox [formControl]="productForm.controls.size.controls.xs"
+        >XS</mat-checkbox
+      >
+      <mat-checkbox [formControl]="productForm.controls.size.controls.s"
+        >S</mat-checkbox
+      >
+      <mat-checkbox [formControl]="productForm.controls.size.controls.l"
+        >L</mat-checkbox
+      >
+      <mat-checkbox [formControl]="productForm.controls.size.controls.xl"
+        >XL</mat-checkbox
+      >
+      <mat-checkbox [formControl]="productForm.controls.size.controls.xxl"
+        >XXL</mat-checkbox
+      >
+    </section>
+  </form>
+  <div class="buttons">
+    <button class="buttons__reset" mat-button (click)="reset()">Reset</button>
+    <button class="buttons__submit" mat-button (click)="reset()">Submit</button>
+  </div>
+</div>
