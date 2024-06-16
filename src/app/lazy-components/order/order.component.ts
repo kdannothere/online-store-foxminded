@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { GoodsSelectionComponent } from './components/goods-selection/goods-selection.component';
 import { Item } from '../../models/item';
 import { Observable, map } from 'rxjs';

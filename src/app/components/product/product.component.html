@@ -2,7 +2,7 @@
   class="product"
   [ngClass]="{ 'product--special': product.main }"
   [class]="getDiscountClass(product.discount)"
-	(click)="handleClick()"
+  (click)="handleClick()"
 >
   <div *ngIf="product.discount > 0" class="product__discount">
     <p class="product__discount-value">{{ product.discount }}<span>%</span></p>
@@ -13,12 +13,18 @@
   </div>
   <div
     class="product__image"
-    [ngStyle]="{ 'background-image': 'url(' + product.imgUrl + ')' }"
+    [ngStyle]="{ 'background-image': 'url(' + (product.imgUrl[0] || '') + ')' }"
   ></div>
   <div class="product__details">
     <p class="product__details-price">
       <span
-        >{{ priceService.getDiscountedPrice(product.price, product.discount, product.discountUntil) | currency : "EUR" : "symbol" : "1.0-2" }}
+        >{{
+          priceService.getDiscountedPrice(
+            product.price,
+            product.discount,
+            product.discountUntil
+          ) | currency : "EUR" : "symbol" : "1.0-2"
+        }}
       </span>
     </p>
     <p *ngIf="product.discount > 0" class="product__details-price-original">
@@ -32,7 +38,10 @@
       product.shipping
     }}</span>
     <span *ngIf="product.isNew" [ngClass]="getTagClass()">New</span>
-    <span *ngIf="priceService.isDiscountActive(product.discountUntil)" [ngClass]="getTagClass()">
+    <span
+      *ngIf="priceService.isDiscountActive(product.discountUntil)"
+      [ngClass]="getTagClass()"
+    >
       <app-discount-timer
         [discountUntil]="product.discountUntil"
       ></app-discount-timer>

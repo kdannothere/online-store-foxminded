@@ -59,10 +59,4 @@ export class ProductComponent {
   isShippingTagActive(): boolean {
     return this.product.shipping !== null;
   }
-
-  // isDiscountTagActive(): boolean {
-  //   const currentTime = new Date().getTime();
-  //   const discountTime = new Date(this.product.discountUntil).getTime();
-  //   return discountTime > currentTime;
-  // }
 }

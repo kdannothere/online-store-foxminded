@@ -64,16 +64,6 @@ export class ProductDetailsComponent implements OnDestroy {
     return '/products/' + ((this.product && this.product.id) || 0);
   }
 
-  // it is a list of product images
-  get images(): string[] {
-    if (!this.product) return [];
-    return [this.product.imgUrl, 'fakeSecondImageUrl'];
-  }
-
-  get picture(): string {
-    return this.activeImage;
-  }
-
   changeActiveImage(imageUrl: string) {
     this.activeImage = imageUrl;
   }
@@ -198,7 +188,7 @@ export class ProductDetailsComponent implements OnDestroy {
           return;
         }
         this.product = product;
-        this.activeImage = product.imgUrl;
+        this.activeImage = product.imgUrl[0] || '';
         this.readMore = product.description.length > 190;
       });
   }

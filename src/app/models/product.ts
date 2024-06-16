@@ -2,7 +2,7 @@ import { Review } from "./review";
 
 export interface Product {
   id: number;
-  imgUrl: string;
+  imgUrl: string[];
   price: number;
   discount: number;
   main: boolean;

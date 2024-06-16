@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 
@@ -18,14 +18,14 @@ export class PaymentMethodComponent {
     paypal: string;
     cash: string;
   };
-	@Output() nextClicked = new EventEmitter();
-	@Output() backClicked = new EventEmitter();
-	
-	emitNextClicked() {
+  @Output() nextClicked = new EventEmitter();
+  @Output() backClicked = new EventEmitter();
+
+  emitNextClicked() {
     this.nextClicked.emit();
   }
-	
-	emitBackClicked() {
+
+  emitBackClicked() {
     this.backClicked.emit();
   }
 }

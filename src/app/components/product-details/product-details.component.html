@@ -2,7 +2,7 @@
   <div class="details__left">
     <div
       class="details__picture"
-      [ngStyle]="{ 'background-image': 'url(' + picture + ')' }"
+      [ngStyle]="{ 'background-image': 'url(' + activeImage + ')' }"
     >
       <span class="details__picture-zoom">+ zoom</span>
     </div>
@@ -10,7 +10,7 @@
     <div class="details__picture-row">
       <div
         class="details__picture-small"
-        *ngFor="let image of images"
+        *ngFor="let image of product?.imgUrl"
         [style.background-image]="'url(' + image + ')'"
         [ngClass]="{ 'details__picture-small--active': activeImage === image }"
         (click)="changeActiveImage(image)"

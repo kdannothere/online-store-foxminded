@@ -20,7 +20,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-add-new-product',
   standalone: true,
   imports: [
-		CommonModule,
+    CommonModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
@@ -38,10 +38,7 @@ export class AddNewProductComponent {
 
   getEmptyProductForm() {
     return new FormGroup({
-      imageUrl: new FormControl('', [
-        Validators.required,
-        Validators.maxLength(2000),
-      ]),
+      imageUrl: new FormControl('', [Validators.maxLength(2000)]),
       price: new FormControl(0, [Validators.required, Validators.min(0)]),
       discount: new FormControl(0, [Validators.required, Validators.min(0)]),
       main: new FormControl(false, Validators.required),
@@ -82,10 +79,11 @@ export class AddNewProductComponent {
 
   addProduct() {
     const controls = this.productForm.controls;
+    const imageUrls: string[] = []; // todo /**/
 
     const product: Product = {
       id: this.shopDataService.getUniqueId(),
-      imgUrl: controls.imageUrl.value || '',
+      imgUrl: imageUrls,
       price: controls.price.value || 0,
       discount: controls.discount.value || 0,
       main: controls.main.value || false,
