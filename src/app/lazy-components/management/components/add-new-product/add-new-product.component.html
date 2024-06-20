@@ -1,23 +1,25 @@
 <div class="wrapper">
   <div class="title">Add new product</div>
   <form class="product-form">
-    <mat-form-field
-      class="product-form__container product-form__form-field"
-      appearance="outline"
-    >
-      <mat-label class="product-form__label">Image URL</mat-label>
-      <input
-        matInput
-        [formControl]="productForm.controls.imageUrl"
-        type="text"
+    <ng-container *ngFor="let imageUrl of productForm.controls.imageUrls.controls; index as index">
+      <mat-form-field
+        class="product-form__container product-form__form-field"
+        appearance="outline"
+      >
+        <mat-label class="product-form__label">Image URL</mat-label>
+        <input
+          matInput
+          [formControl]="productForm.controls.imageUrls.controls[index]"
+          type="text"
+        />
+      </mat-form-field>
+      <img
+        class="product-form__image-preview"
+        *ngIf="productForm.controls.imageUrls.controls[index].value"
+        src="{{ productForm.controls.imageUrls.controls[index].value }}"
+        alt="Image Preview"
       />
-    </mat-form-field>
-    <img
-      class="product-form__image-preview"
-      *ngIf="productForm.controls.imageUrl.value"
-      src="{{productForm.controls.imageUrl.value}}"
-      alt="Image Preview"
-    >
+    </ng-container>
     <mat-form-field
       class="product-form__container product-form__form-field"
       appearance="outline"
@@ -84,7 +86,7 @@
       <div class="radio-group-label">Free shipping?</div>
       <div class="radio-group-buttons">
         <mat-radio-button [value]="'Free shipping'">Yes</mat-radio-button>
-        <mat-radio-button [value]="null">No</mat-radio-button>
+        <mat-radio-button [value]="'null'">No</mat-radio-button>
       </div>
     </mat-radio-group>
     <mat-form-field
@@ -155,6 +157,6 @@
   </form>
   <div class="buttons">
     <button class="buttons__reset" mat-button (click)="reset()">Reset</button>
-    <button class="buttons__submit" mat-button (click)="reset()">Submit</button>
+    <button class="buttons__submit" mat-button (click)="submit()">Submit</button>
   </div>
 </div>

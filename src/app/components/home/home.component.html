@@ -3,12 +3,18 @@
   <div class="list">
     <div class="special-product-list">
       <ng-container *ngFor="let product of specialProducts$ | async">
-        <app-product [product]="product" (clicked)="navigateToOtherPage(product.id)"></app-product>
+        <app-product
+          [product]="product"
+          (clicked)="navigateToOtherPage(product.id)"
+        ></app-product>
       </ng-container>
     </div>
     <div class="product-list">
       <ng-container *ngFor="let product of products$ | async">
-        <app-product [product]="product" (clicked)="navigateToOtherPage(product.id)"></app-product>
+        <app-product
+          [product]="product"
+          (clicked)="navigateToOtherPage(product.id)"
+        ></app-product>
       </ng-container>
     </div>
   </div>

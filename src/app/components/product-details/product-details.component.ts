@@ -25,6 +25,7 @@ import { PriceService } from '../../services/price.service';
 })
 export class ProductDetailsComponent implements OnDestroy {
   product: Product | null = null;
+  loading = true;
   private destroy$ = new Subject<void>();
   private imageFolderPath = '/assets/images/';
   private minDescriptionLimit: number = 190;
@@ -180,16 +181,21 @@ export class ProductDetailsComponent implements OnDestroy {
 
   private _initProductById(productId: number) {
     this.shopDataService
-      .getProductById(productId)
-      .pipe(takeUntil(this.destroy$))
+      .getItemById(productId)
+      .pipe(
+        map((product) => product),
+        takeUntil(this.destroy$)
+      )
       .subscribe((product) => {
-        if (!product) {
+        if (product === null) {
+          console.log('null');
           this.redirectPage();
           return;
         }
         this.product = product;
         this.activeImage = product.imgUrl[0] || '';
         this.readMore = product.description.length > 190;
+        this.loading = false;
       });
   }
 

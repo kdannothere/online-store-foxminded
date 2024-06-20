@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DiscountTimerComponent } from './discount-timer/discount-timer.component';
 import { CharactersLimitationPipe } from '../../pipes/characters-limitation.pipe';
@@ -23,6 +23,8 @@ export class ProductComponent {
   @Output() clicked = new EventEmitter<void>();
 
   constructor(public priceService: PriceService) {}
+
+  ngOnInit(): void {}
 
   handleClick() {
     this.clicked.emit();
