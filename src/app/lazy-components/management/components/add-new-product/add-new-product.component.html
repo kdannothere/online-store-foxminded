@@ -1,25 +1,42 @@
 <div class="wrapper">
   <div class="title">Add new product</div>
   <form class="product-form">
-    <ng-container *ngFor="let imageUrl of productForm.controls.imageUrls.controls; index as index">
-      <mat-form-field
-        class="product-form__container product-form__form-field"
-        appearance="outline"
+    <mat-form-field
+      class="product-form__container product-form__form-field"
+      appearance="outline"
+    >
+      <mat-label class="product-form__label">Id</mat-label>
+      <input matInput [formControl]="productForm.controls.id" type="text" />
+    </mat-form-field>
+    <div class="product-form__form-container">
+      <ng-container
+        *ngFor="
+          let imageUrl of productForm.controls.imgUrl.controls;
+          index as index
+        "
       >
-        <mat-label class="product-form__label">Image URL</mat-label>
-        <input
-          matInput
-          [formControl]="productForm.controls.imageUrls.controls[index]"
-          type="text"
+        <mat-form-field
+          class="product-form__container product-form__form-field"
+          appearance="outline"
+        >
+          <mat-label class="product-form__label">Image URL</mat-label>
+          <input
+            matInput
+            [formControl]="productForm.controls.imgUrl.controls[index]"
+            type="text"
+          />
+        </mat-form-field>
+        <img
+          class="product-form__image-preview"
+          *ngIf="productForm.controls.imgUrl.controls[index].value"
+          src="{{ productForm.controls.imgUrl.controls[index].value }}"
+          alt="Image Preview"
         />
-      </mat-form-field>
-      <img
-        class="product-form__image-preview"
-        *ngIf="productForm.controls.imageUrls.controls[index].value"
-        src="{{ productForm.controls.imageUrls.controls[index].value }}"
-        alt="Image Preview"
-      />
-    </ng-container>
+      </ng-container>
+      <div class="product-form__button-add-container">
+        <button mat-stroked-button (click)="addImage()">Add image</button>
+      </div>
+    </div>
     <mat-form-field
       class="product-form__container product-form__form-field"
       appearance="outline"
@@ -118,45 +135,54 @@
         <mat-radio-button [value]="false">No</mat-radio-button>
       </div>
     </mat-radio-group>
-    <section class="product-form__container product-form__section">
-      <div class="product-form__label">Available colors:</div>
-      <mat-checkbox [formControl]="productForm.controls.color.controls.green"
-        >Green</mat-checkbox
+    <div class="product-form__form-container">
+      <ng-container
+        *ngFor="
+          let color of productForm.controls.color.controls;
+          index as index
+        "
       >
-      <mat-checkbox [formControl]="productForm.controls.color.controls.grey"
-        >Grey</mat-checkbox
+        <mat-form-field
+          class="product-form__container product-form__form-field"
+          appearance="outline"
+        >
+          <mat-label class="product-form__label">Color</mat-label>
+          <input
+            matInput
+            [formControl]="productForm.controls.color.controls[index]"
+            type="text"
+          />
+        </mat-form-field>
+      </ng-container>
+      <div class="product-form__button-add-container">
+        <button mat-stroked-button (click)="addColor()">Add color</button>
+      </div>
+    </div>
+    <div class="product-form__form-container">
+      <ng-container
+        *ngFor="let color of productForm.controls.size.controls; index as index"
       >
-      <mat-checkbox [formControl]="productForm.controls.color.controls.blue"
-        >Blue</mat-checkbox
-      >
-      <mat-checkbox [formControl]="productForm.controls.color.controls.black"
-        >Black</mat-checkbox
-      >
-      <mat-checkbox [formControl]="productForm.controls.color.controls.orange"
-        >Orange</mat-checkbox
-      >
-    </section>
-    <section class="product-form__container product-form__section">
-      <div class="product-form__label">Available sizes:</div>
-      <mat-checkbox [formControl]="productForm.controls.size.controls.xs"
-        >XS</mat-checkbox
-      >
-      <mat-checkbox [formControl]="productForm.controls.size.controls.s"
-        >S</mat-checkbox
-      >
-      <mat-checkbox [formControl]="productForm.controls.size.controls.l"
-        >L</mat-checkbox
-      >
-      <mat-checkbox [formControl]="productForm.controls.size.controls.xl"
-        >XL</mat-checkbox
-      >
-      <mat-checkbox [formControl]="productForm.controls.size.controls.xxl"
-        >XXL</mat-checkbox
-      >
-    </section>
+        <mat-form-field
+          class="product-form__container product-form__form-field"
+          appearance="outline"
+        >
+          <mat-label class="product-form__label">Size</mat-label>
+          <input
+            matInput
+            [formControl]="productForm.controls.size.controls[index]"
+            type="text"
+          />
+        </mat-form-field>
+      </ng-container>
+      <div class="product-form__button-add-container">
+        <button mat-stroked-button (click)="addSize()">Add size</button>
+      </div>
+    </div>
   </form>
   <div class="buttons">
-    <button class="buttons__reset" mat-button (click)="reset()">Reset</button>
-    <button class="buttons__submit" mat-button (click)="submit()">Submit</button>
+    <button class="buttons__reset" mat-raised-button (click)="reset()">Reset</button>
+    <button class="buttons__submit" mat-raised-button (click)="submit()">
+      Submit
+    </button>
   </div>
 </div>

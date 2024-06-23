@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductComponent } from '../product/product.component';
 import { ShopDataService } from '../../services/shop-data.service';
-import { Observable, Subject, map, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { Product } from '../../models/product';
 import { Router } from '@angular/router';
 
@@ -14,31 +14,34 @@ import { Router } from '@angular/router';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnDestroy {
-  allProducts$: Observable<Product[]>;
-  specialProducts$: Observable<Product[]>;
-  products$: Observable<Product[]>;
+  specialProducts: Product[] = [];
+  products: Product[] = [];
   private destroy$ = new Subject<void>();
 
   constructor(
     private shopDataService: ShopDataService,
     private router: Router
   ) {
-    this.allProducts$ = this.shopDataService.getAllProducts();
-    this.specialProducts$ = this.allProducts$.pipe(
-      map((products) => products.filter((product) => product.main)),
-			takeUntil(this.destroy$)
-    );
-    this.products$ = this.allProducts$.pipe(
-      map((products) => products.filter((product) => !product.main)),
-			takeUntil(this.destroy$)
-    );
+
+    // Subscribe to allProducts$ and process the data
+    this.shopDataService.getAllProducts()
+		.pipe(takeUntil(this.destroy$))
+		.subscribe((products) => {
+      products.forEach((product) => {
+        if (product.main) {
+          this.specialProducts = [...this.specialProducts, product];
+        } else {
+          this.products = [...this.products, product];
+        }
+      });
+    });
   }
 
-  navigateToOtherPage(productId: number) {
+  navigateToProductDetails(productId: number) {
     this.router.navigate([`/products/${productId}`]);
   }
 
-	ngOnDestroy() {
+  ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
   }

@@ -25,9 +25,9 @@
   &__form-field {
     margin-bottom: 16px;
   }
-	&__form-field-date {
-		margin-bottom: 32px;
-	}
+  &__form-field-date {
+    margin-bottom: 32px;
+  }
   &__radio-group {
     display: flex;
     flex-flow: column nowrap;
@@ -39,12 +39,6 @@
     }
     .radio-group-buttons {
     }
-  }
-	&__section {
-		display: flex;
-		flex-flow: column nowrap;
-    margin-bottom: 16px;
-		font-size: 16px;
   }
 
   &__label {
@@ -59,28 +53,43 @@
       --mdc-radio-selected-icon-color: blueviolet;
     }
   }
-	&__image-preview{
-		width: 400px;
-		height: 400px;
-		object-fit: contain;
-		border: 1px solid #000;
-		margin-bottom: 36px;
-	}
+  &__image-preview {
+    width: 400px;
+    height: 400px;
+    object-fit: contain;
+    border: 1px solid #000;
+    margin-top: -24px;
+		margin-bottom: 16px;
+    & ~ .product-form__button-add-container {
+      margin-top: 0;
+    }
+  }
+  &__button-add-container {
+    margin-top: -24px;
+    margin-bottom: 36px;
+    & button {
+      color: white;
+			background-color: blueviolet;
+    }
+  }
 }
 .buttons {
-	width: 400px;
-	border-top: 1px solid #000;
-	margin-top: 32px;
-	text-align: center;
-	&__reset {
-		font-size: 16px;
-		margin-inline: 8px;
-		color: red !important;
-	}
-	
-	&__submit {
-		font-size: 16px;
-		margin-inline: 8px;
-		color: blue !important;
-	}
+  width: 400px;
+  border-top: 1px solid #000;
+  margin-top: 16px;
+	padding-top: 16px;
+  text-align: center;
+  &__reset {
+    font-size: 16px;
+    margin-inline: 8px;
+    color: white !important;
+    background-color: red !important;
+  }
+
+  &__submit {
+    font-size: 16px;
+    margin-inline: 8px;
+    color: white !important;
+    background-color: green !important;
+  }
 }

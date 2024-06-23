@@ -2,18 +2,18 @@
   <h1 class="page-title">Main</h1>
   <div class="list">
     <div class="special-product-list">
-      <ng-container *ngFor="let product of specialProducts$ | async">
+      <ng-container *ngFor="let product of specialProducts">
         <app-product
           [product]="product"
-          (clicked)="navigateToOtherPage(product.id)"
+          (clicked)="navigateToProductDetails(product.id)"
         ></app-product>
       </ng-container>
     </div>
     <div class="product-list">
-      <ng-container *ngFor="let product of products$ | async">
+      <ng-container *ngFor="let product of products">
         <app-product
           [product]="product"
-          (clicked)="navigateToOtherPage(product.id)"
+          (clicked)="navigateToProductDetails(product.id)"
         ></app-product>
       </ng-container>
     </div>

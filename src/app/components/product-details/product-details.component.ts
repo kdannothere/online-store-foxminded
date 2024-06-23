@@ -181,7 +181,7 @@ export class ProductDetailsComponent implements OnDestroy {
 
   private _initProductById(productId: number) {
     this.shopDataService
-      .getItemById(productId)
+      .getProductById(productId)
       .pipe(
         map((product) => product),
         takeUntil(this.destroy$)
