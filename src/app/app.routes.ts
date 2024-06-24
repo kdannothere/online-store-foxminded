@@ -33,13 +33,13 @@ export const routes: Routes = [
         (m) => m.AddNewProductComponent
       ),
   },
-  // {
-  //   path: 'management/edit-delete-product',
-  //   loadComponent: () =>
-  //     import('./lazy-components/management/components/edit-delete-product/edit-delete-product.component').then(
-  //       (m) => m.EditDeleteProductComponent
-  //     ),
-  // },
+  {
+    path: 'management/edit-delete-product',
+    loadComponent: () =>
+      import('./lazy-components/management/components/edit-delete-product/edit-delete-product.component').then(
+        (m) => m.EditDeleteProductComponent
+      ),
+  },
   { path: '', component: HomeComponent },
   { path: 'products/:productId', component: ProductDetailsComponent },
   { path: 'contact', component: ContactComponent },

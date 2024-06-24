@@ -1,7 +1,7 @@
 import { Review } from "./review";
 
 export interface Product {
-  id: number;
+  id: string;
   imgUrl: string[];
   price: number;
   discount: number;

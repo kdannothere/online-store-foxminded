@@ -146,7 +146,7 @@ export class OrderComponent {
             const item: Item = { ...product, quantity: 1 };
             return item;
           })
-          .filter((item) => item.id < 2);
+          .filter((item) => item.shop === 'Amazon');
       })
     );
   }

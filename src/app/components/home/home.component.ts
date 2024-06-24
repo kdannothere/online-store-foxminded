@@ -37,7 +37,7 @@ export class HomeComponent implements OnDestroy {
     });
   }
 
-  navigateToProductDetails(productId: number) {
+  navigateToProductDetails(productId: string) {
     this.router.navigate([`/products/${productId}`]);
   }
 

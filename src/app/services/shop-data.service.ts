@@ -24,75 +24,108 @@ export class ShopDataService {
   }
 
   getAllProducts(): Observable<Product[]> {
-		const params = {
-			TableName: 'products',
-			Limit: 100,
-		};
-		let loading = false;
-	
-		return new Observable<Product[]>((observer) => {
-			if (loading) return; // prevent multiple requests
-			loading = true;
-	
-			const scanExecute = async (startKey?: AWS.DynamoDB.DocumentClient.Key) => {
-				try {
-					const scanResponse = await this.dynamoDB.scan({ ...params, ExclusiveStartKey: startKey }).promise();
-					const scanResults: Product[] = [];
-	
-					if (scanResponse.Items?.length) {
-						scanResponse.Items.forEach((item) => {
-							const formData = item['formData'];
-							const product = this.getProduct(formData);
-							scanResults.push(product);
-						});
-					}
-	
-					if (scanResponse.LastEvaluatedKey) {
-						// Continue scanning if there are more items
-						await scanExecute(scanResponse.LastEvaluatedKey);
-					} else {
-						observer.next(scanResults);
-						observer.complete();
-					}
-				} catch (err: any) {
-					console.error('Error scanning DynamoDB:', err.message);
-					observer.error(err);
-				}
-			};
-	
-			scanExecute();
-		});
-	}
-	
+    const params = {
+      TableName: 'products',
+      Limit: 100,
+    };
+    let loading = false;
 
-  getUniqueId(): number {
-    return new Date().getTime();
+    return new Observable<Product[]>((observer) => {
+      if (loading) return; // prevent multiple requests
+      loading = true;
+
+      const scanExecute = async (
+        startKey?: AWS.DynamoDB.DocumentClient.Key
+      ) => {
+        try {
+          const scanResponse = await this.dynamoDB
+            .scan({ ...params, ExclusiveStartKey: startKey })
+            .promise();
+          const scanResults: Product[] = [];
+
+          if (scanResponse.Items?.length) {
+            scanResponse.Items.forEach((item) => {
+              const formData = item['formData'] || null;
+              if (formData) {
+                const product = this.getProduct(formData);
+                scanResults.push(product);
+              }
+            });
+          }
+
+          if (scanResponse.LastEvaluatedKey) {
+            // Continue scanning if there are more items
+            await scanExecute(scanResponse.LastEvaluatedKey);
+          } else {
+            observer.next(scanResults);
+            observer.complete();
+          }
+        } catch (err: any) {
+          console.error('Error scanning DynamoDB:', err.message);
+          observer.error(err);
+        }
+      };
+
+      scanExecute();
+    });
   }
 
-  getProductById(id: number): Observable<Product | null> {
-		const params = {
-			TableName: 'products',
-			KeyConditionExpression: 'id = :partitionKey',
-			ExpressionAttributeValues: {
-				':partitionKey': id.toString(),
-			},
-		};
-	
-		return new Observable<Product | null>((observer) => {
-			this.dynamoDB.query(params).promise()
-				.then((data) => {
-					const formData = data.Items?.[0]?.['formData'] || null;
-					observer.next(this.getProduct(formData));
-					observer.complete();
-				})
-				.catch((err) => {
-					console.error('Error querying DynamoDB:', err.message);
+  getProductFormDataById(id: string): Observable<any> {
+    const params = {
+      TableName: 'products',
+      KeyConditionExpression: 'id = :partitionKey',
+      ExpressionAttributeValues: {
+        ':partitionKey': id,
+      },
+    };
+
+    return new Observable<any>((observer) => {
+      this.dynamoDB
+        .query(params)
+        .promise()
+        .then((data) => {
+          if (data.Items?.length) {
+            const formData = data.Items?.[0]?.['formData'] || null;
+            if (formData) {
+              observer.next(formData);
+              observer.complete();
+            }
+						return;
+          }
 					observer.next(null);
+          observer.complete();
+        })
+        .catch((err) => {
+          console.error('Error querying DynamoDB:', err.message);
+          observer.next(null);
+          observer.complete();
+        });
+    });
+  }
+
+  deleteProductFormData(id: string, shop: string): Observable<boolean> {
+    const params = {
+      TableName: 'products',
+      Key: {
+        id: id,
+				shop: shop
+      },
+    };
+
+    return new Observable<any>((observer) => {
+			this.dynamoDB.delete(params, (err) => {
+				if (err) {
+					console.error('Error deleting item:', err.message);
+					observer.next(false);
 					observer.complete();
-				});
+				} else {
+					console.log('Item deleted successfully');
+					observer.next(true);
+					observer.complete();
+				}
+			});
 		});
 	}
-	
 
   async saveData(id: string, shop: string, formData: string) {
     const params = {
@@ -133,8 +166,4 @@ export class ShopDataService {
     };
     return product;
   }
-
-  // updateProduct(product: Product) {}
-
-  // deleteProduct(product: Product) {}
 }

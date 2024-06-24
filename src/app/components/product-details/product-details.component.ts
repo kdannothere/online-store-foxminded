@@ -168,7 +168,7 @@ export class ProductDetailsComponent implements OnDestroy {
   ngOnInit() {
     this.route.params
       .pipe(
-        map((params) => +params['productId'] as number),
+        map((params) => params['productId']),
         takeUntil(this.destroy$)
       )
       .subscribe((productId) => this._initProductById(productId));
@@ -179,22 +179,22 @@ export class ProductDetailsComponent implements OnDestroy {
     this.destroy$.complete();
   }
 
-  private _initProductById(productId: number) {
+  private _initProductById(productId: string) {
     this.shopDataService
-      .getProductById(productId)
+      .getProductFormDataById(productId)
       .pipe(
-        map((product) => product),
+        map((formData) => formData),
         takeUntil(this.destroy$)
       )
-      .subscribe((product) => {
-        if (product === null) {
-          console.log('null');
+      .subscribe((formData) => {
+        if (formData === null) {
+          console.log('Product not found :(');
           this.redirectPage();
           return;
         }
-        this.product = product;
-        this.activeImage = product.imgUrl[0] || '';
-        this.readMore = product.description.length > 190;
+        this.product = this.shopDataService.getProduct(formData);
+        this.activeImage = this.product.imgUrl[0] || '';
+        this.readMore = this.product.description.length > 190;
         this.loading = false;
       });
   }
