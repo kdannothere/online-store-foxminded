@@ -30,7 +30,7 @@ export class AddNewProductComponent {
         if (success) {
           alert('Data saved successfully :)');
         } else {
-          alert('Failed to save data :(');
+          alert('Failed to save data ¯\_(ツ)_/¯');
         }
       })
       .catch((error) => {

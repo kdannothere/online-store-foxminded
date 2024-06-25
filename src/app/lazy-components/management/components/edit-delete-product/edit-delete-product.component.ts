@@ -51,7 +51,7 @@ export class EditDeleteProductComponent {
           this.loading = false;
           return;
         }
-        alert('Product not found :(');
+        alert('Product not found ¯\_(ツ)_/¯');
       });
   }
 
@@ -70,7 +70,7 @@ export class EditDeleteProductComponent {
           alert('Deleted successfully');
           return;
         }
-        alert('Deleting failed :(');
+        alert('Deleting failed ¯\_(ツ)_/¯');
       });
   }
 
@@ -87,7 +87,7 @@ export class EditDeleteProductComponent {
         if (success) {
           alert('Data saved successfully :)');
         } else {
-          alert('Failed to save data :(');
+          alert('Failed to save data ¯\_(ツ)_/¯');
         }
       })
       .catch((error) => {

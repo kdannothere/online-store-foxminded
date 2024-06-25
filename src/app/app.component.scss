@@ -9,7 +9,9 @@
   padding-right: 100px;
 
   &__menu {
-    & * {
+		display: flex;
+		flex-flow: row nowrap;
+    & > * {
       color: $color-orange-normal;
 			font-size: 18px;
       &:hover {
@@ -18,10 +20,12 @@
     }
   }
 
-  &__home {
-    margin-right: 44px;
+  &__link {
+		margin-right: 44px;
   }
 
-  &__contact {
-  }
+	&__management{
+		display: none;
+	}
+
 }

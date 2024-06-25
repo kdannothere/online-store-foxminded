@@ -1,8 +1,15 @@
 <div class="header">
-	<div class="header__menu">
-		<a href="/" class="header__home">Home</a>
-		<a href="/contact" class="header__contact">Contact</a>
-	</div>
+  <div class="header__menu">
+    <a
+      href="/management"
+      class="header__link header__management"
+      [ngStyle]="{ display: isAdmin() || isOwner() ? 'block' : 'none' }"
+      >Management</a
+    >
+    <a href="/" class="header__link">Home</a>
+    <a href="/contact" class="header__link">Contact</a>
+    <a href="/order" class="header__link">Order</a>
+  </div>
 </div>
 
 <router-outlet />

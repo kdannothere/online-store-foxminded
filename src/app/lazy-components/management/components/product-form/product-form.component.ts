@@ -182,7 +182,7 @@ export class ProductFormComponent implements OnInit {
   }
   isFormValid(): boolean {
     if (!this.productForm.valid) {
-      alert('Some fields are not filled correctly :(');
+      alert('Some fields are not filled correctly ¯\_(ツ)_/¯');
       return false;
     }
     return true;

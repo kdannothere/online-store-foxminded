@@ -188,7 +188,7 @@ export class ProductDetailsComponent implements OnDestroy {
       )
       .subscribe((formData) => {
         if (formData === null) {
-          console.log('Product not found :(');
+          console.log('Product not found ¯\_(ツ)_/¯');
           this.redirectPage();
           return;
         }
