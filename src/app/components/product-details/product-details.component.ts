@@ -24,6 +24,13 @@ import { PriceService } from '../../services/price.service';
   styleUrl: './product-details.component.scss',
 })
 export class ProductDetailsComponent implements OnDestroy {
+  constructor(
+    public priceService: PriceService,
+    private shopDataService: ShopDataService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
   product: Product | null = null;
   loading = true;
   private destroy$ = new Subject<void>();
@@ -39,13 +46,6 @@ export class ProductDetailsComponent implements OnDestroy {
   reviewFieldValue: string = '';
   nameFieldMaxLength = 50;
   reviewFieldMaxLength = 2000;
-
-  constructor(
-    public priceService: PriceService,
-    private shopDataService: ShopDataService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
 
   hideReadMore() {
     this.descriptionLimit = this.maxDescriptionLimit;
@@ -188,7 +188,7 @@ export class ProductDetailsComponent implements OnDestroy {
       )
       .subscribe((formData) => {
         if (formData === null) {
-          console.log('Product not found ¯\_(ツ)_/¯');
+          alert('Product not found ¯_(ツ)_/¯');
           this.redirectPage();
           return;
         }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DiscountTimerComponent } from './discount-timer/discount-timer.component';
 import { CharactersLimitationPipe } from '../../pipes/characters-limitation.pipe';
@@ -24,10 +24,13 @@ export class ProductComponent {
 
   constructor(public priceService: PriceService) {}
 
-  ngOnInit(): void {}
-
   handleClick() {
     this.clicked.emit();
+  }
+
+  get descriptionLimit(): number {
+    if (this.product.main) return 130;
+    return 70;
   }
 
   getDiscountClass(discount: number): string {
@@ -40,7 +43,7 @@ export class ProductComponent {
     const activeTags = [
       this.isShippingTagActive(),
       this.product.isNew,
-      this.priceService.isDiscountActive(this.product.discountUntil),
+      this.isDiscountActive(),
     ].filter(Boolean).length;
     let classes = 'tag'; // Base class applied to every tag
     switch (activeTags) {
@@ -60,5 +63,9 @@ export class ProductComponent {
 
   isShippingTagActive(): boolean {
     return this.product.shipping !== null;
+  }
+
+  isDiscountActive(): boolean {
+    return this.priceService.isDiscountActive(this.product.discountUntil);
   }
 }

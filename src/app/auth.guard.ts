@@ -8,7 +8,17 @@ export const byAuthUser = () => {
   if (authService.isAuthenticated()) {
     return true;
   } else {
-    router.navigate(['/login']);
+    router.navigate(['/access-denied']);
+    return false;
+  }
+};
+export const byNotAuthUserOrAdmin = () => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+  if (!authService.isAuthenticated() || authService.isAdmin()) {
+    return true;
+  } else {
+    router.navigate(['/access-denied']);
     return false;
   }
 };

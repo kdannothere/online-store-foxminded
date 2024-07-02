@@ -1,31 +1,54 @@
 @import "colors";
 
 .header {
-	height: 50px;
   display: flex;
-  flex-flow: row nowrap;
   justify-content: end;
-	align-items: center;
-  padding-right: 100px;
+  align-items: center;
 
   &__menu {
-		display: flex;
-		flex-flow: row nowrap;
-    & > * {
-      color: $color-orange-normal;
-			font-size: 18px;
-      &:hover {
-        color: $color-orange-red;
-      }
-    }
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: end;
+    align-items: center;
+    padding-block: 8px;
+    padding-inline: 100px;
   }
 
   &__link {
-		margin-right: 44px;
+    color: $color-orange-normal;
+    font-size: 18px;
+    margin-right: 44px;
+    margin-block: 8px;
+    text-wrap: nowrap;
+    cursor: pointer;
+    &:hover {
+      color: $color-orange-red;
+    }
   }
 
-	&__management{
-		display: none;
-	}
+  &__management {
+    display: none;
+  }
 
+  &__user {
+    color: $color-blue;
+    &:hover {
+      color: blueviolet;
+    }
+  }
+
+  &__logout {
+    color: $color-pink;
+    &:hover {
+      color: red;
+    }
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .header {
+    &__menu {
+      justify-content: center;
+    }
+  }
 }

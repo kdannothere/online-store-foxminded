@@ -14,15 +14,17 @@
           <span class="block__title">Your products</span>
         </div>
         <div class="block__body" *ngIf="activeBlock === blocks.goods">
-          <ng-container *ngIf="cartItems$ | async as items; else loading">
+          <ng-container *ngIf="cartItems$ | async as items; else isEmpty">
             <app-goods-selection
               [items]="items"
               [itemsQuantity]="orderForm.get('itemsQuantity')"
               (nextClicked)="nextEventHandler()"
             ></app-goods-selection>
-            <div *ngIf="items.length === 0">Your cart is empty.</div>
+            <div *ngIf="items.length === 0">Your cart is empty ¯\_(ツ)_/¯</div>
           </ng-container>
-          <ng-template #loading>Loading data...</ng-template>
+          <ng-template #isEmpty
+            ><span id="isEmpty">Your cart is empty <span>¯\_(ツ)_/¯</span></span></ng-template
+          >
         </div>
       </div>
       <div
@@ -104,9 +106,14 @@
   </ng-container>
   <ng-template #loading>Loading data...</ng-template>
   <ng-template #seeOurProducts>
-		<div class="see-products">
-			<div class="see-products__info">Your cart is empty, please press the button below to see all our products &#59;&#41;</div>
-			<a href="home" class="see-products__button"><button mat-button>See our products</button></a>
-		</div>
-	</ng-template>
+    <div class="see-products">
+      <div class="see-products__info">
+        Your cart is empty, please press the button below to see all our
+        products &#59;&#41;
+      </div>
+      <a href="home" class="see-products__button"
+        ><button mat-button>See our products</button></a
+      >
+    </div>
+  </ng-template>
 </div>

@@ -9,8 +9,9 @@
     <p>off</p>
   </div>
   <div class="product__description">
-    {{ product.description | charactersLimitation : 70 }}
+    {{ product.description | charactersLimitation : descriptionLimit }}
   </div>
+
   <div
     class="product__image"
     [ngStyle]="{ 'background-image': 'url(' + (product.imgUrl[0] || '') + ')' }"
@@ -27,7 +28,10 @@
         }}
       </span>
     </p>
-    <p *ngIf="product.discount > 0" class="product__details-price-original">
+    <p
+      *ngIf="product.discount > 0 && isDiscountActive()"
+      class="product__details-price-original"
+    >
       {{ product.price | currency : "EUR" : "symbol" : "1.0-2"
       }}<span class="line"></span>
     </p>

@@ -9,7 +9,7 @@ import * as AWS from 'aws-sdk';
 })
 export class ShopDataService {
   private dynamoDB: AWS.DynamoDB.DocumentClient;
-
+	
   // Access credentials
   accessKeyId = environment.awsAccessKeyId;
   secretAccessKey = environment.awsSecretAccessKey;
@@ -21,6 +21,10 @@ export class ShopDataService {
       secretAccessKey: this.secretAccessKey,
     });
     this.dynamoDB = new AWS.DynamoDB.DocumentClient();
+  }
+
+  getDatabase(): AWS.DynamoDB.DocumentClient {
+    return this.dynamoDB;
   }
 
   getAllProducts(): Observable<Product[]> {
@@ -90,9 +94,9 @@ export class ShopDataService {
               observer.next(formData);
               observer.complete();
             }
-						return;
+            return;
           }
-					observer.next(null);
+          observer.next(null);
           observer.complete();
         })
         .catch((err) => {
@@ -108,24 +112,24 @@ export class ShopDataService {
       TableName: 'products',
       Key: {
         id: id,
-				shop: shop
+        shop: shop,
       },
     };
 
     return new Observable<any>((observer) => {
-			this.dynamoDB.delete(params, (err) => {
-				if (err) {
-					console.error('Error deleting item:', err.message);
-					observer.next(false);
-					observer.complete();
-				} else {
-					console.log('Item deleted successfully');
-					observer.next(true);
-					observer.complete();
-				}
-			});
-		});
-	}
+      this.dynamoDB.delete(params, (err) => {
+        if (err) {
+          console.error('Error deleting item:', err.message);
+          observer.next(false);
+          observer.complete();
+        } else {
+          console.log('Item deleted successfully');
+          observer.next(true);
+          observer.complete();
+        }
+      });
+    });
+  }
 
   async saveData(id: string, shop: string, formData: string) {
     const params = {

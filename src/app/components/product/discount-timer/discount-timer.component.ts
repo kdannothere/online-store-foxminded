@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable, interval, map, startWith } from 'rxjs';
+import { Observable, Subject, interval, map, startWith, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-discount-timer',
@@ -8,10 +8,11 @@ import { Observable, interval, map, startWith } from 'rxjs';
   imports: [CommonModule],
   template: `<span>{{ remainingTime$ | async }}</span>`,
 })
-export class DiscountTimerComponent {
+export class DiscountTimerComponent implements OnDestroy {
   @Input() discountUntil!: string;
 
   remainingTime$: Observable<string>;
+  private destroy$ = new Subject<void>();
 
   constructor() {
     this.remainingTime$ = this.createRemainingTimeObservable();
@@ -20,7 +21,8 @@ export class DiscountTimerComponent {
   private createRemainingTimeObservable(): Observable<string> {
     return interval(1000).pipe(
       startWith(this.calculateRemainingTime()),
-      map(() => this.calculateRemainingTime())
+      map(() => this.calculateRemainingTime()),
+      takeUntil(this.destroy$)
     );
   }
 
@@ -38,5 +40,10 @@ export class DiscountTimerComponent {
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
     return `${hours}h ${minutes}m ${seconds}s`;
+  }
+	
+  ngOnDestroy() {
+		this.destroy$.next();
+		this.destroy$.complete();
   }
 }
