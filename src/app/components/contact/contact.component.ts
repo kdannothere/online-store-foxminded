@@ -10,12 +10,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { FieldInputComponent } from '../field-input/field-input.component';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
   imports: [
     CommonModule,
+		FieldInputComponent,
     ReactiveFormsModule,
     FormsModule,
     MatFormFieldModule,
@@ -32,13 +34,13 @@ export class ContactComponent {
       Validators.minLength(1),
       Validators.maxLength(33),
     ]),
-    surname: new FormControl('', [
+    surname: new FormControl('a', [
       Validators.required,
       Validators.minLength(1),
       Validators.maxLength(33),
     ]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    message: new FormControl('', [
+    email: new FormControl('a@aaa', [Validators.required, Validators.email]),
+    message: new FormControl('1qqqqqqqqq', [
       Validators.required,
       Validators.minLength(10),
       Validators.maxLength(1000),
