@@ -3,7 +3,7 @@ import { UserRole } from '../models/user-role';
 import { ShopDataService } from './shop-data.service';
 import { Observable } from 'rxjs';
 import { Result } from '../models/result';
-import { Error } from '../models/error';
+import { ShopError } from '../models/shop-error';
 import { CookieService } from './cookie.service';
 import { UserCookie } from '../models/user-cookie';
 import { UserService } from './user.service';
@@ -88,7 +88,7 @@ export class AuthService {
             }
             return;
           }
-          const error: Error = {
+          const error: ShopError = {
             msgDev: 'User not found in database',
             msgUser: 'Email or password is wrong.',
           };
@@ -100,7 +100,7 @@ export class AuthService {
           observer.complete();
         })
         .catch((err) => {
-          const error: Error = {
+          const error: ShopError = {
             msgDev: 'Error querying DynamoDB:' + err.message,
             msgUser: 'Something went wrong. Please try again.',
           };
@@ -137,7 +137,7 @@ export class AuthService {
     return new Observable<Result>((observer) => {
       this.emailExists(email).then((exists) => {
         if (exists) {
-          const error: Error = {
+          const error: ShopError = {
             msgDev: 'Email already exists in database.',
             msgUser:
               'Email already exists. Please try another email or sign in.',
@@ -151,7 +151,7 @@ export class AuthService {
           return;
         }
         if (exists === null) {
-          const error: Error = {
+          const error: ShopError = {
             msgDev: 'Error in emailExists()',
             msgUser: 'Something went wrong. Please try again.',
           };
@@ -175,7 +175,7 @@ export class AuthService {
           observer.complete();
         })
         .catch((err) => {
-          const error: Error = {
+          const error: ShopError = {
             msgDev: 'Error saving user in DynamoDB:' + err.message,
             msgUser: 'Something went wrong. Please try again.',
           };

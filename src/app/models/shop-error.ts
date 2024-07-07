@@ -1,4 +1,4 @@
-export interface Error {
+export interface ShopError {
   msgDev: string;
   msgUser: string;
 }

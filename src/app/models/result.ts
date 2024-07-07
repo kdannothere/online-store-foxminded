@@ -1,6 +1,6 @@
-import { Error } from './error';
+import { ShopError } from './shop-error';
 
 export interface Result {
   data: any | null;
-  error: Error | null;
+  error: ShopError | null;
 }

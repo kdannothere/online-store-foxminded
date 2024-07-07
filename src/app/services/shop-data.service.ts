@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, timeout, Observable, of } from 'rxjs';
 import { Product } from '../models/product';
 import { environment } from '../../environments/environment';
 import * as AWS from 'aws-sdk';
+import { Result } from '../models/result';
+import { ShopError } from '../models/shop-error';
+import { shopMessages } from '../shop-messages';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShopDataService {
   private dynamoDB: AWS.DynamoDB.DocumentClient;
-	
+
   // Access credentials
   accessKeyId = environment.awsAccessKeyId;
   secretAccessKey = environment.awsSecretAccessKey;
@@ -107,7 +110,11 @@ export class ShopDataService {
     });
   }
 
-  deleteProductFormData(id: string, shop: string): Observable<boolean> {
+  deleteProductFormData(
+    id: string,
+    shop: string,
+    timeLimit: number
+  ): Observable<Result> {
     const params = {
       TableName: 'products',
       Key: {
@@ -115,23 +122,46 @@ export class ShopDataService {
         shop: shop,
       },
     };
+    const result: Result = {
+      data: null,
+      error: null,
+    };
+    const error: ShopError = {
+      msgDev: shopMessages.errorDeletingProduct + ' ',
+      msgUser: shopMessages.errorDeletingProduct,
+    };
 
-    return new Observable<any>((observer) => {
+    return new Observable<Result>((observer) => {
       this.dynamoDB.delete(params, (err) => {
         if (err) {
-          console.error('Error deleting item:', err.message);
-          observer.next(false);
-          observer.complete();
+          error.msgDev = error.msgDev + err.message;
+          result.error = error;
+          observer.next(result); // Operation failed
         } else {
-          console.log('Item deleted successfully');
-          observer.next(true);
-          observer.complete();
+          result.data = true;
+          observer.next(result); // Operation succeeded
         }
+        observer.complete();
       });
-    });
+    }).pipe(
+      timeout(timeLimit),
+      catchError((err) => {
+        error.msgDev = error.msgDev + err.toString();
+        if (err.name === 'TimeoutError') {
+          error.msgUser = shopMessages.timeout;
+        }
+        result.error = error;
+        return of(result);
+      })
+    );
   }
 
-  async saveData(id: string, shop: string, formData: string) {
+  saveData(
+    id: string,
+    shop: string,
+    formData: string,
+    timeLimit: number
+  ): Observable<Result> {
     const params = {
       TableName: 'products',
       Item: {
@@ -140,14 +170,38 @@ export class ShopDataService {
         formData: formData,
       },
     };
+    const result: Result = {
+      data: null,
+      error: null,
+    };
+    const error: ShopError = {
+      msgDev: shopMessages.errorSavingProduct + ' ',
+      msgUser: shopMessages.errorSavingProduct,
+    };
 
-    try {
-      await this.dynamoDB.put(params).promise();
-      return true; // Operation succeeded
-    } catch (err: any) {
-      console.error('Error saving product:', err.toString());
-      return false; // Operation failed
-    }
+    return new Observable<Result>((observer) => {
+      this.dynamoDB.put(params, (err) => {
+        if (err) {
+          error.msgDev = error.msgDev + err.message;
+          result.error = error;
+          observer.next(result); // Operation failed
+        } else {
+          result.data = true;
+          observer.next(result); // Operation succeeded
+        }
+        observer.complete();
+      });
+    }).pipe(
+      timeout(timeLimit),
+      catchError((err) => {
+        error.msgDev = error.msgDev + err.toString();
+        if (err.name === 'TimeoutError') {
+          error.msgUser = shopMessages.timeout;
+        }
+        result.error = error;
+        return of(result);
+      })
+    );
   }
 
   getProduct(formData: string): Product {
