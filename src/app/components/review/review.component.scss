@@ -1,0 +1,21 @@
+.review {
+	padding-bottom: 32px;
+	padding-left: 24px;
+	font-size: 17px;
+  &__author {
+		padding-bottom: 8px;
+  }
+
+  &__rating {
+		display: inline-block;
+    width: 107px;
+    height: 22px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  &__text {
+		padding-top: 8px;
+  }
+}

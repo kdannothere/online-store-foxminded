@@ -1,0 +1,14 @@
+<div class="wrapper">
+  <input
+    [formControl]="control"
+    #inputView
+    [type]="type"
+    (keyup)="validate()"
+    (focus)="animatePlaceholder()"
+    (blur)="validate(); animatePlaceholder()"
+    [class]="class"
+  />
+  <span #placeholderView class="placeholder" [class]="placeholderClass" (click)="focusInput()">{{
+    placeholder
+  }}<span *ngIf="required">*</span></span>
+</div>

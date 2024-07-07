@@ -1,0 +1,8 @@
+<div class="review">
+  <div class="review__author">{{ review.author }}</div>
+  <div
+    class="review__rating"
+    [style.background-image]="'url(' + ratingImage + ')'"
+  ></div>
+  <div class="review__text">{{ review.text }}</div>
+</div>

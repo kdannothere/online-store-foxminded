@@ -1,0 +1,19 @@
+<div class="wrapper">
+  <app-item
+    *ngFor="let item of items; index as i"
+    [item]="item"
+    [itemIndex]="i"
+    [quantity]="itemsQuantity.controls[i]"
+  >
+  </app-item>
+  <div class="button-next">
+    <button
+      [disabled]="!(isFormArrayValid$ | async)"
+      [ngStyle]="{ opacity: (isFormArrayValid$ | async) ? '1' : '0.6' }"
+      (click)="emitNextClicked()"
+      mat-button
+    >
+      Next
+    </button>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <div class="title">Your cart:</div>
+  <app-item
+    *ngFor="let item of items; index as i"
+    [item]="item"
+    [itemIndex]="i"
+    [inSummary]="inSummary"
+		[quantity]="itemsQuantity.controls[i]"
+  >
+  </app-item>
+  <div class="info">
+    <p class="info__delivery-address">
+      <span class="info__delivery-address-text">Delivery address:</span>
+      <span class="info__delivery-address-value">{{ deliveryAddress }}</span>
+    </p>
+    <p class="info__payment-method">
+      <span class="info__payment-method-text">Payment method:</span>
+      <span class="info__payment-method-value">{{ paymentMethod }}</span>
+    </p>
+    <p class="info__delivery-date">
+      <span class="info__delivery-date-text">Delivery date:</span>
+      <span class="info__delivery-date-value">{{ deliveryDate }}</span>
+    </p>
+  </div>
+  <div class="buttons">
+    <button class="buttons__back" (click)="emitBackClicked()" mat-button>Back</button>
+    <button class="buttons__reset" (click)="emitResetClicked()" mat-button>Reset</button>
+    <button class="buttons__submit" (click)="emitSubmitClicked()" mat-button>Submit</button>
+  </div>
+</div>

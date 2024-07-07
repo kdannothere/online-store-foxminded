@@ -1,0 +1,24 @@
+<div class="reg" [formGroup]="regForm">
+  <div class="reg__title">Registration</div>
+  <mat-form-field class="reg__field" appearance="outline">
+    <mat-label class="reg__field-label">Email</mat-label>
+    <input matInput formControlName="email" type="email" />
+  </mat-form-field>
+  <mat-form-field class="reg__field password" appearance="outline">
+    <mat-label class="reg__label">Password</mat-label>
+    <mat-hint class="reg__label">Should contain from 4 to 128 characters</mat-hint>
+    <input matInput formControlName="password" type="password" />
+  </mat-form-field>
+  <mat-form-field class="reg__field" appearance="outline">
+    <mat-label class="reg__label">Confirm password</mat-label>
+    <input matInput formControlName="confirmPassword" type="password" />
+  </mat-form-field>
+  <div class="reg__buttons">
+    <button class="reg__button" mat-stroked-button (click)="submit()">Submit</button>
+    <button class="reg__button" mat-stroked-button [matMenuTriggerFor]="options">Other options</button>
+    <mat-menu #options="matMenu">
+      <button mat-menu-item (click)="registerByGoogle()">Register using your Google account</button>
+      <button mat-menu-item (click)="registerByFacebook()">Register using your Facebook account</button>
+    </mat-menu>
+  </div>
+</div>

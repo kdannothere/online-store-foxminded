@@ -1,0 +1,25 @@
+.wrapper {
+}
+.question {
+  font-size: 18px;
+  padding-bottom: 8px;
+  color: white;
+}
+.date-form {
+  ::ng-deep .mdc-label {
+    color: white;
+		cursor: pointer;
+  }
+	&__calendar-block{
+		color: white;
+		padding-top: 12px;
+	}
+}
+
+.buttons {
+  margin-top: 16px;
+  margin-bottom: 24px;
+  & button {
+    color: white;
+  }
+}

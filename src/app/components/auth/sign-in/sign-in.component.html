@@ -1,0 +1,21 @@
+<div class="sign-in modal" [@fadeInOut]>
+  <div class="sign-in__close" (click)="close()"></div>
+  <div class="sign-in__title">Sign in</div>
+  <mat-form-field class="sign-in__field" appearance="outline">
+    <mat-label class="sign-in__field-label">Email</mat-label>
+    <input matInput [formControl]="email" type="email" />
+  </mat-form-field>
+  <mat-form-field class="sign-in__field" appearance="outline">
+    <mat-label class="sign-in__label">Password</mat-label>
+    <input matInput [formControl]="password" type="password" />
+  </mat-form-field>
+  <div class="sign-in__buttons">
+    <button class="sign-in__button" mat-stroked-button (click)="submit()">Sign in</button>
+    <button class="sign-in__button" mat-stroked-button [matMenuTriggerFor]="options">Other options</button>
+		<button class="sign-in__button" mat-stroked-button (click)="goToRegistrationPage()">Register</button>
+    <mat-menu #options="matMenu">
+      <button mat-menu-item (click)="signInWithGoogle()">Sign in using Google</button>
+      <button mat-menu-item>Sign in using Facebook</button>
+    </mat-menu>
+  </div>
+</div>

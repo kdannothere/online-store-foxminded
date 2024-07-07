@@ -1,23 +1,54 @@
+@import "colors";
+
 .header {
   display: flex;
-  flex-flow: row nowrap;
   justify-content: end;
-  padding-right: 100px;
-  padding-top: 32px;
+  align-items: center;
 
   &__menu {
-    & * {
-      color: rgb(255, 165, 0);
-      &:hover {
-        color: rgb(255, 69, 0);
-      }
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: end;
+    align-items: center;
+    padding-block: 8px;
+    padding-inline: 100px;
+  }
+
+  &__link {
+    color: $color-orange-normal;
+    font-size: 18px;
+    margin-right: 44px;
+    margin-block: 8px;
+    text-wrap: nowrap;
+    cursor: pointer;
+    &:hover {
+      color: $color-orange-red;
     }
   }
 
-  &__home {
-    margin-right: 44px;
+  &__management {
+    display: none;
   }
 
-  &__contact {
+  &__user {
+    color: $color-blue;
+    &:hover {
+      color: blueviolet;
+    }
+  }
+
+  &__logout {
+    color: $color-pink;
+    &:hover {
+      color: red;
+    }
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .header {
+    &__menu {
+      justify-content: center;
+    }
   }
 }

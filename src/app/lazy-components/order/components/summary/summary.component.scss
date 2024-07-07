@@ -1,0 +1,80 @@
+@import 'colors';
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  width: 600px;
+  margin-bottom: 24px;
+}
+
+.title{
+	color: white;
+	font-size: 16px;
+	padding-bottom: 16px;
+}
+
+.info {
+	display: flex;
+	flex-flow: column nowrap;
+	color: white;
+
+	&__delivery-address {
+		display: flex;
+		flex-flow: row nowrap;
+	}
+
+	&__delivery-address-text {
+		font-weight: 500;
+	}
+
+	&__delivery-address-value {
+		padding-left: 8px;
+		font-weight: 300;
+	}
+
+	&__payment-method {
+		display: flex;
+		flex-flow: row nowrap;
+	}
+
+	&__payment-method-text {
+		font-weight: 500;
+	}
+
+	&__payment-method-value {
+		padding-left: 8px;
+		font-weight: 300;
+	}
+
+	&__delivery-date {
+		display: flex;
+		flex-flow: row nowrap;
+	}
+
+	&__delivery-date-text {
+		font-weight: 500;
+	}
+
+	&__delivery-date-value {
+		padding-left: 8px;
+		font-weight: 300;
+	}
+}
+
+
+.buttons {
+
+	&__back {
+		color: white;
+	}
+
+	&__reset {
+		color: $color-orange-red;
+	}
+
+	&__submit {
+		color: $color-orange-normal;
+	}
+}
+

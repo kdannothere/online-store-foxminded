@@ -1,0 +1,41 @@
+.wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+  padding-bottom: 80px;
+}
+.title {
+  font-size: 28px;
+  color: black;
+  padding-block: 64px;
+}
+.buttons {
+  width: 400px;
+  border-top: 1px solid #000;
+  margin-top: 16px;
+	padding-top: 16px;
+  text-align: center;
+  &__reset {
+    font-size: 16px;
+    margin-inline: 8px;
+    color: white !important;
+    background-color: red !important;
+		opacity: 0.9;
+		&:hover{
+			opacity: 1;
+		}
+  }
+
+  &__submit {
+    font-size: 16px;
+    margin-inline: 8px;
+    color: white !important;
+    background-color: green !important;
+		opacity: 0.9;
+		&:hover{
+			opacity: 1;
+		}
+  }
+}

@@ -1,0 +1,35 @@
+<div class="wrapper">
+  <div class="title">Edit or delete product</div>
+  <div class="search-form">
+    <mat-form-field class="search-form__id-form" appearance="outline">
+      <mat-label class="search-form__id-form-label">Id</mat-label>
+      <input matInput [formControl]="id" type="text" />
+    </mat-form-field>
+    <button
+      class="search-form__button-search"
+      mat-raised-button
+      (click)="loadData()"
+    >
+      Search
+    </button>
+  </div>
+  <div class="form-container" *ngIf="formData">
+    <app-product-form [formData]="formData" #productFormComponentRef></app-product-form>
+    <div class="form-container__buttons">
+      <button
+        class="form-container__button-edit"
+        mat-raised-button
+        (click)="saveData()"
+      >
+        Edit
+      </button>
+      <button
+        class="form-container__button-delete"
+        mat-raised-button
+        (click)="delete()"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+</div>

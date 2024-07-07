@@ -1,0 +1,230 @@
+@import "colors";
+
+.product {
+  position: relative;
+  width: 420px;
+  height: 240px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  border: 2px solid;
+  font-size: 16px;
+  margin-left: 64px;
+  margin-bottom: 64px;
+  transition: scale 0.2s ease-in-out;
+  cursor: pointer;
+
+  @media only screen and (max-width: 1047px) {
+    & {
+      margin-left: 0;
+    }
+  }
+
+  &:hover {
+    scale: 1.01;
+  }
+
+  &__discount {
+    position: absolute;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    top: 8px;
+    left: 8px;
+    border-radius: 50%;
+    color: #fff;
+		font-size: 14px;
+  }
+
+  &__discount-value {
+		transform: translateY(12px);
+  }
+
+  &__description {
+    display: block;
+    width: 220px;
+    height: 52px;
+    overflow: hidden;
+    padding-left: 24px;
+    margin-top: 100px;
+    margin-bottom: 8px;
+		transform: translateY(-24px);
+    font-size: 15px;
+    color: gray;
+    line-height: 17px;
+  }
+
+  &__image {
+    width: 160px;
+    height: 136px;
+    margin-block: 8px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  &__details {
+    grid-column: 1/3;
+    height: 40px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: start;
+    padding-bottom: 16px;
+  }
+
+  &__details-price {
+    padding-left: 16px;
+    font-size: 24px;
+    font-weight: 300;
+    text-wrap: nowrap;
+  }
+
+  &__details-price-original {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: 32px;
+    color: gray;
+    font-size: 16px;
+    text-wrap: nowrap;
+
+    & .line {
+      position: absolute;
+      width: 100%;
+      height: 1.5px;
+      background-color: gray;
+      transform: rotate(15deg);
+    }
+  }
+
+  &__details-shop {
+    width: 100%;
+    text-align: end;
+    padding-right: 16px;
+    color: gray;
+  }
+  &__tag-list {
+    grid-column: 1/3;
+    height: 40px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    border-top: 2px dashed gray;
+
+    $border-color: rgb(214, 214, 214);
+
+    .tag {
+      height: 18px;
+      display: flex;
+      justify-content: center;
+      font-size: 14px;
+      color: gray;
+    }
+
+    .tag--three-tags {
+      flex-basis: 33.3%;
+      &:first-child {
+        border-right: 2px solid $border-color;
+      }
+      &:last-child {
+        border-left: 2px solid $border-color;
+      }
+    }
+
+    .tag--two-tags {
+      flex-basis: 50%;
+      &:first-child {
+        border-right: 2px solid $border-color;
+      }
+    }
+    .tag--one-tag {
+      flex-basis: 100%;
+    }
+  }
+}
+
+.product--special {
+  height: 544px;
+
+  .product {
+    &__image {
+      position: relative;
+      grid-column: 1/3;
+      width: 280px;
+      height: 280px;
+      order: -1;
+      justify-self: center;
+      margin-top: 72px;
+      margin-bottom: 25px;
+    }
+
+    &__details {
+      padding: 0;
+      border-bottom: 2px dashed gray;
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+      order: -1;
+    }
+
+    &__details-price {
+      font-weight: 400;
+    }
+
+    &__description {
+			width: 420px;
+			height: 104px;
+      margin: 0;
+      margin-bottom: 28px;
+			padding-right: 20px;
+      transform: translateY(8px);
+    }
+		&__tag-list {
+			margin-top: -52px;
+		}
+  }
+}
+
+.product--high-discount {
+  border-color: $color-orange-red;
+
+  .product {
+    &__discount {
+      background-color: $color-orange-red;
+    }
+
+    &__details-price {
+      color: $color-orange-red;
+    }
+  }
+}
+
+.product--medium-discount {
+  border-color: $color-pink;
+
+  .product {
+    &__discount {
+      background-color: $color-pink;
+    }
+
+    &__details-price {
+      color: $color-pink;
+    }
+  }
+}
+
+.product--low-discount {
+  border-color: $color-orange-normal;
+
+  .product {
+    &__discount {
+      background-color: $color-orange-normal;
+    }
+
+    &__details-price {
+      color: $color-orange-normal;
+    }
+  }
+}

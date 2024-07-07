@@ -1,8 +1,39 @@
 <div class="header">
-	<div class="header__menu">
-		<a href="/" class="header__home">Home</a>
-		<a href="/contact" class="header__contact">Contact</a>
-	</div>
+  <div class="header__menu">
+    <span
+      (click)="goTo('management')"
+      class="header__link header__management"
+      [ngStyle]="{ display: isAdmin() || isOwner() ? 'block' : 'none' }"
+      >Management</span
+    >
+    <span (click)="goTo('')" class="header__link">Home</span>
+    <span (click)="goTo('contact')" class="header__link">Contact</span>
+    <span
+      class="header__link"
+      [ngStyle]="{ display: isAuthenticated() ? 'block' : 'none' }"
+      (click)="goTo('order')"
+      >Order</span
+    >
+    <span *ngIf="!isAuthenticated()" class="header__link" (click)="showSignIn()"
+      >Sign in</span
+    >
+    <span
+      *ngIf="isAuthenticated()"
+      class="header__link header__user"
+      (click)="(0)"
+      >Hello {{ userEmail }}</span
+    >
+    <span
+      *ngIf="isAuthenticated()"
+      class="header__link header__logout"
+      (click)="logout()"
+      >Log out</span
+    >
+  </div>
 </div>
 
 <router-outlet />
+
+<ng-template #modalTemplate>
+  <app-sign-in></app-sign-in>
+</ng-template>

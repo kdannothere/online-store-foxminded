@@ -1,0 +1,10 @@
+<div class="wrapper">
+  <div class="title">Add new product</div>
+  <app-product-form #productFormComponentRef></app-product-form>
+  <div class="buttons">
+    <button class="buttons__reset" mat-raised-button (click)="resetForm()">Reset</button>
+    <button class="buttons__submit" mat-raised-button (click)="saveData()">
+      Submit
+    </button>
+  </div>
+</div>
