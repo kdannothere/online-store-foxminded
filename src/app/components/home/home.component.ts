@@ -22,19 +22,19 @@ export class HomeComponent implements OnDestroy {
     private shopDataService: ShopDataService,
     private router: Router
   ) {
-
     // Subscribe to allProducts$ and process the data
-    this.shopDataService.getAllProducts()
-		.pipe(takeUntil(this.destroy$))
-		.subscribe((products) => {
-      products.forEach((product) => {
-        if (product.main) {
-          this.specialProducts = [...this.specialProducts, product];
-        } else {
-          this.products = [...this.products, product];
-        }
+    this.shopDataService
+      .getAllProducts()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((products) => {
+        products.forEach((product) => {
+          if (product.main) {
+            this.specialProducts = [...this.specialProducts, product];
+          } else {
+            this.products = [...this.products, product];
+          }
+        });
       });
-    });
   }
 
   navigateToProductDetails(productId: string) {

@@ -34,13 +34,13 @@ export class ContactComponent {
       Validators.minLength(1),
       Validators.maxLength(33),
     ]),
-    surname: new FormControl('a', [
+    surname: new FormControl('', [
       Validators.required,
       Validators.minLength(1),
       Validators.maxLength(33),
     ]),
-    email: new FormControl('a@aaa', [Validators.required, Validators.email]),
-    message: new FormControl('1qqqqqqqqq', [
+    email: new FormControl('', [Validators.required, Validators.email]),
+    message: new FormControl('', [
       Validators.required,
       Validators.minLength(10),
       Validators.maxLength(1000),

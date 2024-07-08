@@ -23,7 +23,6 @@ export class GoogleCallbackComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.userService.email) {
       this.router.navigate([this.authService.getBackRoute()]);
-			console.log(1);
       return;
     }
     const fragment = window.location.hash.substring(1);
@@ -38,7 +37,6 @@ export class GoogleCallbackComponent implements OnInit, OnDestroy {
       return;
     }
     if (accessToken) {
-			console.log(3);
       this.authService.clearUserCookie();
       fetch('https://openidconnect.googleapis.com/v1/userinfo', {
         headers: {

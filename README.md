@@ -1,27 +1,22 @@
-# AngularTask3OnlineStore
+# Online Store
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
+[Open project's website](http://store-foxminded.lovestoblog.com/)
 
-## Development server
+This project was created from scratch during Angular development course from online school Foxminded. The code is written only by me and checked by my mentor who is a profesional Angular developer with 7 years of work experience.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## What I learned and implemented in my project:
 
-## Code scaffolding
+1. Components
+2. Services
+3. Pipes and custom pipes
+4. Directives 
+5. Work with Observables, Promises and RxJs operators
+6. API for work with AWS DynamoDB (remote database)
+7. Authorization service with additional option to use Google Account
+8. Navigation and AuthGuard
+9. Work with cookies
+10. Reactive forms and custom validation
+11. Angular material forms and custom form field component with input
+12. CMS to add, edit and delete products
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+P.S. Some features on website are in present only visually, for example authorization using Facebook account, scaling image on product details page and adding reviews. I won't implement them in the near future since I am starting a new project for my portfolio.

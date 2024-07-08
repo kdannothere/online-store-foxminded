@@ -49,13 +49,13 @@ export class SignInComponent implements OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  email = new FormControl('aaa@gmail.com', [
+  email = new FormControl('', [
     Validators.required,
     Validators.email,
     Validators.minLength(4),
     Validators.maxLength(128),
   ]);
-  password = new FormControl('1111', [
+  password = new FormControl('', [
     Validators.required,
     Validators.minLength(4),
     Validators.maxLength(128),
@@ -81,7 +81,7 @@ export class SignInComponent implements OnDestroy {
   signInWithGoogle(): void {
     // Construct the OAuth URL
     const clientId = environment.oAuthClientID;
-    const redirectUri = 'http://localhost:4200/google-callback'; // app's callback URL
+    const redirectUri = 'http://store-foxminded.lovestoblog.com/google-callback'; // app's callback URL
     const scope = 'email'; // Requested scopes separated by whitespace
 
     const authUrl =
