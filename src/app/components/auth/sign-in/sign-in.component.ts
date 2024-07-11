@@ -79,8 +79,8 @@ export class SignInComponent implements OnDestroy {
 
   signInWithGoogle(): void {
     // Construct the OAuth URL
-    const clientId = process.env['oAuthClientIDGoogle'];
-    const redirectUri = process.env['redirectUriGoogle'] || ''; // app's callback URL
+    const clientId = process.env['oAuthClientIDGoogle'] || 'oAuthClientIDGoogle-is-empty';
+    const redirectUri = process.env['redirectUriGoogle'] || 'redirectUriGoogle-is-empty'; // app's callback URL
     const scope = 'email'; // Requested scopes separated by whitespace
 
     const authUrl =
