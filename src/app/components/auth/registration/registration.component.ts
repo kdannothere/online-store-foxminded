@@ -11,7 +11,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { AuthService } from '../../../services/auth.service';
 import { Subject, map, takeUntil } from 'rxjs';
-import { environment } from '../../../../environments/environment';
 import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
 
@@ -113,7 +112,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   registerByGoogle() {
     // Construct the OAuth URL
-    const clientId = environment.oAuthClientID;
+    const clientId = process.env['oAuthClientIDGoogle'];
     const redirectUri = 'http://localhost:4200/google-callback'; // app's callback URL
     const scope = 'email'; // Requested scopes separated by whitespace
 
