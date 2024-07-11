@@ -44,7 +44,7 @@ export class SignInComponent implements OnDestroy {
   constructor(
     private dynamicComponentService: DynamicComponentService,
     private authService: AuthService,
-    private router: Router,
+    private router: Router
   ) {}
 
   private destroy$ = new Subject<void>();
@@ -61,7 +61,7 @@ export class SignInComponent implements OnDestroy {
     Validators.maxLength(128),
   ]);
 
-	submit() {
+  submit() {
     if (!this.areFieldsValid()) return;
     this.signIn(this.email.value!, this.password.value!, false);
   }
@@ -81,7 +81,7 @@ export class SignInComponent implements OnDestroy {
   signInWithGoogle(): void {
     // Construct the OAuth URL
     const clientId = environment.oAuthClientID;
-    const redirectUri = 'http://store-foxminded.lovestoblog.com/google-callback'; // app's callback URL
+    const redirectUri = process.env['redirectUriGoogle'] || ''; // app's callback URL
     const scope = 'email'; // Requested scopes separated by whitespace
 
     const authUrl =

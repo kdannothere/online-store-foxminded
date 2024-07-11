@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { catchError, timeout, Observable, of } from 'rxjs';
 import { Product } from '../models/product';
-import { environment } from '../../environments/environment';
 import * as AWS from 'aws-sdk';
 import { Result } from '../models/result';
 import { ShopError } from '../models/shop-error';
@@ -14,8 +13,8 @@ export class ShopDataService {
   private dynamoDB: AWS.DynamoDB.DocumentClient;
 
   // Access credentials
-  accessKeyId = environment.awsAccessKeyId;
-  secretAccessKey = environment.awsSecretAccessKey;
+  accessKeyId = process.env['accessKeyIdAws'];
+  secretAccessKey = process.env['secretAccessKeyAws'];
 
   constructor() {
     AWS.config.update({
