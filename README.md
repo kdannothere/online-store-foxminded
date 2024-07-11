@@ -1,6 +1,6 @@
 # Online Store
 
-[Open project's website](http://store-foxminded.lovestoblog.com/)
+[Open project's website](https://master.d38c5v2l9ucm65.amplifyapp.com/)
 
 This project was created from scratch during Angular development course from online school Foxminded. The code is written only by me and checked by my mentor who is a profesional Angular developer with 7 years of work experience.
 

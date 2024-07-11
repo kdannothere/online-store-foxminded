@@ -113,7 +113,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   registerByGoogle() {
     // Construct the OAuth URL
     const clientId = process.env['oAuthClientIDGoogle'];
-    const redirectUri = 'http://localhost:4200/google-callback'; // app's callback URL
+    const redirectUri = process.env['redirectUriGoogle'] || ''; // app's callback URL
     const scope = 'email'; // Requested scopes separated by whitespace
 
     const authUrl =
