@@ -6,7 +6,7 @@
     "framework": "angular",
     "config": {
       "SourceDir": "src",
-      "DistributionDir": "dist",
+      "DistributionDir": "dist\\angular-task-3-online-store/browser",
       "BuildCommand": "npm run build",
       "StartCommand": "npm run serve"
     }
