@@ -1,0 +1,15 @@
+{
+  "production": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-onlinestorefoxminded-production-5a54f-authRole",
+      "UnauthRoleArn": "arn:aws:iam::992382735461:role/amplify-onlinestorefoxminded-production-5a54f-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::992382735461:role/amplify-onlinestorefoxminded-production-5a54f-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-onlinestorefoxminded-production-5a54f-deployment",
+      "UnauthRoleName": "amplify-onlinestorefoxminded-production-5a54f-unauthRole",
+      "StackName": "amplify-onlinestorefoxminded-production-5a54f",
+      "StackId": "arn:aws:cloudformation:us-east-1:992382735461:stack/amplify-onlinestorefoxminded-production-5a54f/8c425580-407a-11ef-949a-120c81b3e625",
+      "AmplifyAppId": "d2e8slzocp32h5"
+    }
+  }
+}
