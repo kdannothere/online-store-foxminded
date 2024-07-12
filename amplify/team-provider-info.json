@@ -10,6 +10,14 @@
       "StackName": "amplify-onlinestorefoxminded-production-5a54f",
       "StackId": "arn:aws:cloudformation:us-east-1:992382735461:stack/amplify-onlinestorefoxminded-production-5a54f/8c425580-407a-11ef-949a-120c81b3e625",
       "AmplifyAppId": "d2e8slzocp32h5"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2e8slzocp32h5",
+          "type": "manual"
+        }
+      }
     }
   }
 }
