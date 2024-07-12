@@ -16,6 +16,7 @@ import {
   trigger,
 } from '@angular/animations';
 import { Result } from '../../../models/result';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-sign-in',
@@ -79,8 +80,8 @@ export class SignInComponent implements OnDestroy {
 
   signInWithGoogle(): void {
     // Construct the OAuth URL
-    const clientId = process.env['oAuthClientIDGoogle'] || 'oAuthClientIDGoogle-is-empty';
-    const redirectUri = process.env['redirectUriGoogle'] || 'redirectUriGoogle-is-empty'; // app's callback URL
+    const clientId = environment.googleOAuthClientID;
+    const redirectUri = environment.googleRedirectUri; // app's callback URL
     const scope = 'email'; // Requested scopes separated by whitespace
     console.log('clientId=' + clientId);
     console.log('redirectUri=' + redirectUri);

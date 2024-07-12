@@ -5,6 +5,7 @@ import * as AWS from 'aws-sdk';
 import { Result } from '../models/result';
 import { ShopError } from '../models/shop-error';
 import { shopMessages } from '../shop-messages';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +14,8 @@ export class ShopDataService {
   private dynamoDB: AWS.DynamoDB.DocumentClient;
 
   // Access credentials
-  accessKeyId = process.env['accessKeyIdAws'];
-  secretAccessKey = process.env['secretAccessKeyAws'];
+  accessKeyId = environment.awsAccessKeyId;
+  secretAccessKey = environment.awsSecretAccessKey;
 
   constructor() {
     AWS.config.update({

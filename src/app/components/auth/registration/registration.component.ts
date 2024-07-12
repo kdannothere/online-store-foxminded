@@ -13,6 +13,7 @@ import { AuthService } from '../../../services/auth.service';
 import { Subject, map, takeUntil } from 'rxjs';
 import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-registration',
@@ -112,8 +113,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   registerByGoogle() {
     // Construct the OAuth URL
-    const clientId = process.env['oAuthClientIDGoogle'];
-    const redirectUri = process.env['redirectUriGoogle'] || ''; // app's callback URL
+    const clientId = environment.googleOAuthClientID;
+    const redirectUri = environment.googleRedirectUri; // app's callback URL
     const scope = 'email'; // Requested scopes separated by whitespace
 
     const authUrl =
