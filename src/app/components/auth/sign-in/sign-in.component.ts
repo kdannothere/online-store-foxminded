@@ -83,8 +83,6 @@ export class SignInComponent implements OnDestroy {
     const clientId = environment.googleOAuthClientID;
     const redirectUri = environment.googleRedirectUri; // app's callback URL
     const scope = 'email'; // Requested scopes separated by whitespace
-    console.log('clientId=' + clientId);
-    console.log('redirectUri=' + redirectUri);
     const authUrl =
       `https://accounts.google.com/o/oauth2/v2/auth?` +
       `client_id=${clientId}&` +
